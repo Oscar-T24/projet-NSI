@@ -65,4 +65,3 @@ def dessinPendu(index):
 fichier = open("mots.txt",'r')
 liste_mots = fichier.readlines()
 fichier.close()
-
