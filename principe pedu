@@ -1,8 +1,7 @@
 le pendu est un jeu qui :
 1/ prend un mot au hasard parmis un banque de mots
-2/ affiche auatant de cases vides qu'il n'en faut pour la lo,gueur du mot
-3/ à chaque lettre correcte, le jeu affiche les lettres devniées. Dnas le cas contraire, 'l'échafaud' du pendu se construit
-4/ si les pendu est pendu, game over, si toutes lew lettres ont été devinées, parfait !
-
+2/ affiche autant de cases vides qu'il n'en faut pour la longueur du mot
+3/ à chaque lettre correcte, le jeu affiche les lettres devinées. Dans le cas contraire, 'l'échafaud' du pendu se construit
+4/ si les pendu est pendu, game over, si toutes les lettres ont été devinées, parfait !
 
 Idée d'extension du jeu : faire un wordle
