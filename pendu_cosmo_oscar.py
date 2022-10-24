@@ -28,7 +28,7 @@ def jeu_pendu():
     mot_substitue = len(mot_mystere)*['']
     old_mot_subsitue = 0
     stage = 7
-    while stage != 0: # condition de jeu : tant que l'utilisateur n'a pas envcore gangé ou perdu
+    while stage != 0 and (' '.join(mot_substitue)).rstrip() != (' '.join(mot_mystere).rstrip()): # condition de jeu : tant que l'utilisateur n'a pas envcore gangé ou perdu
         n = len(caracteres_essai)
         old_mot_substitue = mot_substitue.count('')
         #print('comptt:',old_mot_substitue)
@@ -51,16 +51,18 @@ def jeu_pendu():
         #print('nouveau compte',mot_substitue.count(''))
                 
         #si aucun mot n'a été trouvé comme bon entre temps, alors il n'y aura pas moins de ' ' dans mot_susbtitue
-        print(old_mot_substitue, ' VS' , mot_substitue.count(''))
+        #print(old_mot_substitue, ' VS' , mot_substitue.count(''))
         if old_mot_substitue == mot_substitue.count(''):
             stage -=1
         print('\n','mot substitué : ',' '.join(mot_substitue))
-        print('\n','mot substitué : ',mot_substitue)
+        #print('\n','mot substitué : ',mot_substitue)
         print("\033[94m {}\033[00m" .format(f"il reste {stage} essais"))
-        print(dessinPendu(8-stage))
+        print(dessinPendu(6-stage))
         
    #---------------------------------------a---------------------------------
-    # A FAIRE  : CONDITION QUI VERIFIE SI L'UTILISATEUR A GAGNE OU PAS
+    if (' '.join(mot_substitue)).rstrip() == (' '.join(mot_mystere).rstrip()):
+        return 'Victoire ! Whooo'
+    return 'Défaite, désole ca sera pour la prochaine fois ;)'
 def entree_utilisateur(entree,essais):
     '''
     actualise la liste des caracteres donnés par l'utilisateur en supprimant les doublons
@@ -72,4 +74,9 @@ def entree_utilisateur(entree,essais):
         print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère'))
         return None
     #------------b----------------------------------------------------
-jeu_pendu()
+
+def main():
+    while True:
+        print(jeu_pendu())
+
+main()
