@@ -2,21 +2,6 @@
 from random import randint
 from pendu_initial_eleves import dessinPendu #pour suimplifier la lecture, j'importe les pendus
 
-fichier = open("mots.txt",'r')
-liste_mots = fichier.readlines()
-fichier.close()
-mot_mystere = (liste_mots[randint(1,323470)])
-mot_trouve = []
-
-for i in mot_mystere[0:-1]: # j'ajoute le -1 pour pas que le nombre d'underscore depasse le nombre de caracteres
-    if i == '-':
-        mot_trouve.append("-")
-    else:
-        mot_trouve.append('_')
-# rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)...
-print(' '.join(mot_trouve))
-print(' '.join(mot_mystere))
-
 def jeu_pendu():
     '''
     lance le jeu du pendu et renvoi 'victoire' ou 'défaite'
@@ -24,10 +9,23 @@ def jeu_pendu():
     la stocke ensuite dans une liste de caractere 'mot_trouve'
     demande à l'utilisateur une lettre
     '''
+    fichier = open("mots.txt",'r')
+    liste_mots = fichier.readlines()
+    fichier.close()
+    mot_mystere = (liste_mots[randint(1,323470)])
+    mot_trouve = []
+
+    for i in mot_mystere[0:-1]: # j'ajoute le -1 pour pas que le nombre d'underscore depasse le nombre de caracteres
+        if i == '-':
+            mot_trouve.append("-")
+        else:
+            mot_trouve.append('_')
+    # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)...
+    print(' '.join(mot_trouve))
     caracteres_essai = [] 
     mot_substitue = len(mot_mystere)*['']
     old_mot_subsitue = 0
-    stage = 7
+    stage = 6
     while stage != 0 and (' '.join(mot_substitue)).rstrip() != (' '.join(mot_mystere).rstrip()): # condition de jeu : tant que l'utilisateur n'a pas envcore gangé ou perdu
         n = len(caracteres_essai)
         old_mot_substitue = mot_substitue.count('')
@@ -62,7 +60,7 @@ def jeu_pendu():
    #---------------------------------------a---------------------------------
     if (' '.join(mot_substitue)).rstrip() == (' '.join(mot_mystere).rstrip()):
         return 'Victoire ! Whooo'
-    return 'Défaite, désole ca sera pour la prochaine fois ;)'
+    return f"Défaite, désole ca sera pour la prochaine fois ;) '\n' le mot était \033[1m{mot_mystere}\033[0m"
 def entree_utilisateur(entree,essais):
     '''
     actualise la liste des caracteres donnés par l'utilisateur en supprimant les doublons
@@ -77,6 +75,12 @@ def entree_utilisateur(entree,essais):
 
 def main():
     while True:
-        print(jeu_pendu())
-
+        try:
+            if input('voulez vous jouer au pendu? [o/n]') == 'o':
+                print(jeu_pendu(), flush = True)
+            else:
+                break
+        except OSError: #si la reponse passe pas, on sait jamais ! 
+                break
+    
 main()
