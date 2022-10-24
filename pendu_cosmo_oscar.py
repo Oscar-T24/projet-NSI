@@ -37,10 +37,14 @@ def jeu_pendu():
             print("carctères déja essayés",caracteres_essai)
             if len(caracteres_essai) > n:
                 break
-        for i in range(len(caracteres_essai)):
-            if caracteres_essai[i] in mot_mystere:
-                print(i)
-    
+            print('', flush=True)
+        for i in list(mot_mystere):
+            print("_", end = ''),
+            for e in caracteres_essai:
+                if i == e or e == i:
+                    print(i.upper(), end = ''),
+        
+
    #------------------------------------------------------------------------
 def entree_utilisateur(entree,essais):
     '''
