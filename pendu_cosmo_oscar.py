@@ -22,6 +22,7 @@ def jeu_pendu():
             mot_trouve.append('_')
     # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)...
     print(' '.join(mot_trouve))
+    print(' '.join(mot_mystere))
     caracteres_essai = [] 
     mot_substitue = len(mot_mystere)*['']
     old_mot_subsitue = 0
@@ -59,8 +60,8 @@ def jeu_pendu():
         
    #---------------------------------------a---------------------------------
     if (' '.join(mot_substitue)).rstrip() == (' '.join(mot_mystere).rstrip()):
-        return 'Victoire ! Whooo'
-    return f"Défaite, désole ca sera pour la prochaine fois ;) '\n' le mot était \033[1m{mot_mystere}\033[0m"
+        return 'Victoire'
+    return mot_mystere
 def entree_utilisateur(entree,essais):
     '''
     actualise la liste des caracteres donnés par l'utilisateur en supprimant les doublons
@@ -74,10 +75,24 @@ def entree_utilisateur(entree,essais):
     #------------b----------------------------------------------------
 
 def main():
+    taux_reussite = 0
+    effectif_victoire = 0
+    total = 0
+    IA = ''
     while True:
         try:
-            if input('voulez vous jouer au pendu? [o/n]') == 'o':
-                print(jeu_pendu(), flush = True)
+            if input(f'voulez vous {IA}jouer au pendu? [o/n]') == 'o':
+                mot = jeu_pendu() 
+                if mot == 'Victoire':
+                    effectif_victoire += 1
+                else:
+                    print(f"Défaite, désole ca sera pour la prochaine fois ;) '\n' le mot était \033[1m{mot}\033[0m")
+                total += 1
+            taux_reussite = round(effectif_victoire / total * 100)
+            print('votre taux de reussite est de : ', taux_reussite, '%')
+            print(effectif_victoire,'effectif vctoires',total)
+            if total > 0 : 
+                IA = 'RE'
             else:
                 break
         except OSError: #si la reponse passe pas, on sait jamais ! 
