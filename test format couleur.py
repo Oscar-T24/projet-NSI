@@ -1,0 +1,1 @@
+print("\033[94m {}\033[00m" .format('hello'))
