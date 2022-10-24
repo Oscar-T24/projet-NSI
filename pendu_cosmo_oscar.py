@@ -1,5 +1,7 @@
 #code du jeu de pendu
+from queue import Empty
 from random import randint
+from types import NoneType
 from pendu_initial_eleves import dessinPendu #pour suimplifier la lecture, j'importe les pendus
 
 fichier = open("mots.txt",'r')
@@ -26,7 +28,13 @@ def jeu_pendu():
     demande à l'utilisateur une lettre
     '''
     caracteres_essai = ['a'] 
-    caracteres_essai.append(entree_utilisateur(input("entrez un caractère"),caracteres_essai))
+    n = len(caracteres_essai)
+    while True:
+        caracteres_essai.append(entree_utilisateur(input("entrez un caractère"),caracteres_essai))
+        caracteres_essai = [i for i in caracteres_essai if i != None]
+        print("carctères déja essayés",caracteres_essai)
+        if len(caracteres_essai) > n:
+            break
 
 def entree_utilisateur(entree,essais):
     '''
@@ -37,5 +45,6 @@ def entree_utilisateur(entree,essais):
         return entree
     else:
         print('caractère déja essayé ! veuillez rentrer un autre caractère')
+        return None
 
 jeu_pendu()
