@@ -22,7 +22,7 @@ def jeu_pendu():
             mot_trouve.append('_')
     # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)...
     print(' '.join(mot_trouve))
-    print(' '.join(mot_mystere))
+    #print(' '.join(mot_mystere))
     caracteres_essai = [] 
     mot_substitue = len(mot_mystere)*['']
     old_mot_subsitue = 0
@@ -90,7 +90,6 @@ def main():
                 total += 1
             taux_reussite = round(effectif_victoire / total * 100)
             print('votre taux de reussite est de : ', taux_reussite, '%')
-            print(effectif_victoire,'effectif vctoires',total)
             if total > 0 : 
                 IA = 'RE'
             else:
