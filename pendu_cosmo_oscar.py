@@ -27,15 +27,21 @@ def jeu_pendu():
     la stocke ensuite dans une liste de caractere 'mot_trouve'
     demande à l'utilisateur une lettre
     '''
-    caracteres_essai = ['a'] 
-    n = len(caracteres_essai)
-    while True:
-        caracteres_essai.append(entree_utilisateur(input("entrez un caractère"),caracteres_essai))
-        caracteres_essai = [i for i in caracteres_essai if i != None]
-        print("carctères déja essayés",caracteres_essai)
-        if len(caracteres_essai) > n:
-            break
-
+    caracteres_essai = [] 
+    while True: # condition de jeu : tant que l'utilisateur n'a pas envcore gangé ou perdu
+        n = len(caracteres_essai)
+        # ---------------- ENTREE DES CARCATERES --------------------------
+        while True:
+            caracteres_essai.append(entree_utilisateur(input("entrez un caractère"),caracteres_essai))
+            caracteres_essai = [i for i in caracteres_essai if i != None]
+            print("carctères déja essayés",caracteres_essai)
+            if len(caracteres_essai) > n:
+                break
+        for i in range(len(caracteres_essai)):
+            if caracteres_essai[i] in mot_mystere:
+                print(i)
+    
+   #------------------------------------------------------------------------
 def entree_utilisateur(entree,essais):
     '''
     actualise la liste des caracteres donnés par l'utilisateur en supprimant les doublons
@@ -46,5 +52,5 @@ def entree_utilisateur(entree,essais):
     else:
         print('caractère déja essayé ! veuillez rentrer un autre caractère')
         return None
-
+    #------------b----------------------------------------------------
 jeu_pendu()
