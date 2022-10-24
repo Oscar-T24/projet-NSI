@@ -25,6 +25,17 @@ def jeu_pendu():
     la stocke ensuite dans une liste de caractere 'mot_trouve'
     demande à l'utilisateur une lettre
     '''
-    print(dessinPendu(1))
+    caracteres_essai = ['a'] 
+    caracteres_essai.append(entree_utilisateur(input("entrez un caractère"),caracteres_essai))
+
+def entree_utilisateur(entree,essais):
+    '''
+    actualise la liste des caracteres donnés par l'utilisateur en supprimant les doublons
+    renvoi un message d'erreur si l'utilisateur a déja rentré un caractere precedent
+    '''
+    if entree not in essais:
+        return entree
+    else:
+        print('caractère déja essayé ! veuillez rentrer un autre caractère')
 
 jeu_pendu()
