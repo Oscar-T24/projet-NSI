@@ -10,6 +10,7 @@ def jeu_pendu():
     tire au hasard un mots parmis ceux de 'mots.txt' et le stocke dans 'mot_mystere'
     la stocke ensuite dans une liste de caractere 'mot_trouve'
     demande à l'utilisateur une lettre
+    None
     '''
     fichier = open("mots.txt",'r')
     liste_mots = fichier.readlines()
@@ -78,6 +79,10 @@ def entree_utilisateur(entree,essais):
 
 # ======================= code moteur ============================================
 def main():
+    """
+    execute le code principal 
+    None
+    """
     taux_reussite = 0
     effectif_victoire = 0
     total = 0
@@ -85,11 +90,12 @@ def main():
     while True:
         try:
             if input(f'voulez vous {Re}jouer au pendu? [o/n]') == 'o':
+                print('\n bonne chance ! \n\n ==> petite astuce : commencez par les voyelles ! ')
                 mot = jeu_pendu() 
                 if mot == 'Victoire':
                     effectif_victoire += 1
                 else:
-                    print(f"Défaite, désole ca sera pour la prochaine fois ;) '\n' le mot était \033[1m{mot}\033[0m")
+                    print(f"Défaite, désole ca sera pour la prochaine fois ;) \n le mot était \033[1m{mot}\033[0m")
                 total += 1
             taux_reussite = round(effectif_victoire / total * 100)
             print('votre taux de reussite est de : ', taux_reussite, '%')
