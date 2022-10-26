@@ -1,4 +1,6 @@
 #code du jeu de pendu
+"""
+"""
 import os
 os.system("") # sur windows, pour activer les séquences de sortie ANSI(mise en forme)
 from random import randint
@@ -34,7 +36,7 @@ def jeu_pendu():
         n = len(caracteres_essai)
         old_mot_substitue = mot_substitue.count('')
         #print('comptt:',old_mot_substitue)
-        # ---------------- ENTREE DES CARCATERES --------------------------
+        # ---------------- ENTREE DES CARACTERES --------------------------
         while True:
             old_mot_substitue = mot_substitue.count('')
             caracteres_essai.append(entree_utilisateur(input("entrez un caractère     "),caracteres_essai))
@@ -73,7 +75,7 @@ def entree_utilisateur(entree,essais):
     if entree.lower() not in essais:
         return entree.lower()
     else:
-        print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère'))
+        print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère',Flush = True))
         return None
     #-----------------------------------------------------------------
 
@@ -86,34 +88,26 @@ def main():
     taux_reussite = 0
     effectif_victoire = 0
     total = 0
-<<<<<<< HEAD
-    IA = ''
-    difficulte = 0
-    while True:
-        try:
-            if input(f'voulez vous {IA}jouer au pendu? [o/n]') == 'o':
-                
-=======
     Re = ''
+    difficulte = 0             
     while True:
         try:
             if input(f'voulez vous {Re}jouer au pendu? [o/n]') == 'o':
                 print('\n bonne chance ! \n\n ==> petite astuce : commencez par les voyelles ! ')
->>>>>>> 96e34ad7ed20fc2f2bce354874f3ad15aa315258
                 mot = jeu_pendu() 
                 if mot == 'Victoire':
                     effectif_victoire += 1
                 else:
                     print(f"Défaite, désole ca sera pour la prochaine fois ;) \n le mot était \033[1m{mot}\033[0m")
                 total += 1
-            taux_reussite = round(effectif_victoire / total * 100)
-            print('votre taux de reussite est de : ', taux_reussite, '%')
-            if total > 0 : 
-                Re = 'Re'
-            else:
-                break
+                taux_reussite = round(effectif_victoire / total * 100)
+                print('votre taux de reussite est de : ', taux_reussite, '%')
+                if total > 0 : 
+                    Re = 'Re'
+                else:
+                    break
         except OSError: #si la reponse passe pas, on sait jamais ! 
-                break
+            break
 
 #========================================================================================  
 main()
