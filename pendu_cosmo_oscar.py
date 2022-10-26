@@ -74,16 +74,17 @@ def entree_utilisateur(entree,essais):
     else:
         print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère'))
         return None
-    #------------b----------------------------------------------------
+    #-----------------------------------------------------------------
 
+# ======================= code moteur ============================================
 def main():
     taux_reussite = 0
     effectif_victoire = 0
     total = 0
-    IA = ''
+    Re = ''
     while True:
         try:
-            if input(f'voulez vous {IA}jouer au pendu? [o/n]') == 'o':
+            if input(f'voulez vous {Re}jouer au pendu? [o/n]') == 'o':
                 mot = jeu_pendu() 
                 if mot == 'Victoire':
                     effectif_victoire += 1
@@ -93,10 +94,11 @@ def main():
             taux_reussite = round(effectif_victoire / total * 100)
             print('votre taux de reussite est de : ', taux_reussite, '%')
             if total > 0 : 
-                IA = 'RE'
+                Re = 'Re'
             else:
                 break
         except OSError: #si la reponse passe pas, on sait jamais ! 
                 break
-    
+
+#========================================================================================  
 main()
