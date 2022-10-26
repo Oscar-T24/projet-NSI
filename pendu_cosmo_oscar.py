@@ -1,4 +1,6 @@
 #code du jeu de pendu
+import os
+os.system("") # sur windows, pour activer les séquences de sortie ANSI(mise en forme)
 from random import randint
 from pendu_initial_eleves import dessinPendu #pour suimplifier la lecture, j'importe les pendus
 
