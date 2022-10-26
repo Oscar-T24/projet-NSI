@@ -1,7 +1,8 @@
 #code du jeu de pendu
+# ATTENTION LA MISE EN FORME DU CODE NE FONCTIONNE QUE SUR LINUX, MAC(quelque soit l'editeur)
+# WINDOWS ==> utiliser VScode 
 """
 mot_mystere : STRING , mot tiré au hasard
-
 
 """
 import os
@@ -47,7 +48,7 @@ def jeu_pendu(niveau):
         while True:
             old_mot_substitue = mot_substitue.count('')
             caracteres_essai.extend(list(entree_utilisateur(input("entrez un caractère     "),caracteres_essai)))
-            caracteres_essai = [i for i in caracteres_essai if i != None and i != '']
+            caracteres_essai = [i for i in caracteres_essai if i != '']
             
             print("carctères déja essayés : ",caracteres_essai)
             if len(caracteres_essai) > n:
@@ -90,7 +91,7 @@ def entree_utilisateur(entree,essais):
     if entree not in essais:
         return entree
     print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère',Flush=False))
-    return None
+    return ''
     #-----------------------------------------------------------------
 
 # ======================= code moteur ============================================
