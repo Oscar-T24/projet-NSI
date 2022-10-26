@@ -8,8 +8,8 @@ import os
 os.system("") # sur windows, pour activer les séquences de sortie ANSI(mise en forme)
 from random import randint
 from pendu_initial_eleves import dessinPendu #pour suimplifier la lecture, j'importe les pendus
-
-def jeu_pendu():
+difficulté = ['facile','moyen','difficile']
+def jeu_pendu(niveau):
     '''
     lance le jeu du pendu et renvoi 'victoire' ou 'défaite'
     tire au hasard un mots parmis ceux de 'mots.txt' et le stocke dans 'mot_mystere'
@@ -18,9 +18,13 @@ def jeu_pendu():
     None
     '''
     fichier = open("mots.txt",'r')
+    
     liste_mots = fichier.readlines()
     fichier.close()
     mot_mystere = (liste_mots[randint(1,323470)])
+    while len(mot_mystere) > (niveau+4)*(niveau+2) or len(mot_mystere) < (niveau+2)*(niveau+2):
+        mot_mystere = (liste_mots[randint(1,323470)])
+    # ====== FAIRE UNE BPUCLE WHILE QUI REGARDE LE NOMBRE DE DISPARITE ENTRE CARACTERES EN FONCTION DE LA DIFFICULT2
     mot_trouve = []
 
     for i in mot_mystere[0:-1]: # j'ajoute le -1 pour pas que le nombre d'underscore depasse le nombre de caracteres
@@ -34,7 +38,7 @@ def jeu_pendu():
     caracteres_essai = [] 
     mot_substitue = len(mot_mystere)*['']
     old_mot_subsitue = 0
-    stage = 6
+    stage = 6#+(2-niveau)
     while stage != 0 and (' '.join(mot_substitue)).rstrip() != (' '.join(mot_mystere).rstrip()): # condition de jeu : tant que l'utilisateur n'a pas envcore gangé ou perdu
         n = len(caracteres_essai)
         old_mot_substitue = mot_substitue.count('')
@@ -66,7 +70,7 @@ def jeu_pendu():
         print("\033[94m {}\033[00m" .format(f"il reste {stage} essais"))
         print(dessinPendu(6-stage))
         
-   #---------------------------------------a---------------------------------
+   #-------------------------------------------------------------------------
     if (' '.join(mot_substitue)).rstrip() == (' '.join(mot_mystere).rstrip()):
         return 'Victoire'
     return mot_mystere
@@ -97,7 +101,7 @@ def main():
         try:
             if input(f'voulez vous {Re}jouer au pendu? [o/n]') == 'o':
                 print('\n bonne chance ! \n\n ==> petite astuce : commencez par les voyelles ! ')
-                mot = jeu_pendu() 
+                mot = jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) 
                 if mot == 'Victoire':
                     effectif_victoire += 1
                 else:
