@@ -1,5 +1,8 @@
 #code du jeu de pendu
 """
+mot_mystere : STRING , mot tiré au hasard
+
+
 """
 import os
 os.system("") # sur windows, pour activer les séquences de sortie ANSI(mise en forme)
@@ -69,8 +72,8 @@ def jeu_pendu():
     return mot_mystere
 def entree_utilisateur(entree,essais):
     '''
-    actualise la liste des caracteres donnés par l'utilisateur en supprimant les doublons
-    renvoi un message d'erreur si l'utilisateur a déja rentré un caractere precedent
+    actualise la liste des caracteres donnés par l'utilisateur(entree) en supprimant les doublons
+    renvoi un message d'erreur si l'utilisateur a déja rentré un caractere precedent(dans les essais)
     '''
     if entree.lower() not in essais:
         return entree.lower()
