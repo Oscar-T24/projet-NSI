@@ -45,7 +45,7 @@ def jeu_pendu():
             if len(caracteres_essai) > n:
                 break
         # ---------------------------------------------------------------------
-        print('', flush=True)
+        print('', flush=False)
         for i in range(len(mot_mystere)):
             print("_", end = ''),
             for e in caracteres_essai:
@@ -75,7 +75,7 @@ def entree_utilisateur(entree,essais):
     if entree.lower() not in essais:
         return entree.lower()
     else:
-        print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère',Flush = True))
+        print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère',Flush=False))
         return None
     #-----------------------------------------------------------------
 
