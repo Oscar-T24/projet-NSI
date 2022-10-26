@@ -81,9 +81,11 @@ def main():
     effectif_victoire = 0
     total = 0
     IA = ''
+    difficulte = 0
     while True:
         try:
             if input(f'voulez vous {IA}jouer au pendu? [o/n]') == 'o':
+                
                 mot = jeu_pendu() 
                 if mot == 'Victoire':
                     effectif_victoire += 1
