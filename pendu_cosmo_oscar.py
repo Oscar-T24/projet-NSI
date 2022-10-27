@@ -35,7 +35,7 @@ def jeu_pendu(niveau):
             mot_trouve.append('_')
     # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)...
     print(' '.join(mot_trouve))
-    #print(' '.join(mot_mystere))
+    #print(' '.join(mot_mystere)) juste pour le test 
     caracteres_essai = [] 
     mot_substitue = len(mot_mystere)*['']
     old_mot_subsitue = 0
@@ -56,7 +56,7 @@ def jeu_pendu(niveau):
         # ---------------------------------------------------------------------
         print('', flush=False)
         for i in range(len(mot_mystere)):
-            print("_", end = ''),
+            print(" _ ", end = ''), # cette partie induit en erreur, car les underscores devraint correpondre aux caracteres manquant et non pas aux espaces vides
             for e in caracteres_essai:
                 if mot_mystere[i] == e or e == mot_mystere[i]:                   
                     print(mot_mystere[i].upper(), end = ''),
@@ -68,7 +68,6 @@ def jeu_pendu(niveau):
         if old_mot_substitue == mot_substitue.count(''):
             stage -=1
         print('\n','mot substitué : ',' '.join(mot_substitue))
-        #print('\n','mot substitué : ',mot_substitue)
         print("\033[94m {}\033[00m" .format(f"il reste {stage} essais"))
         print(dessinPendu(6-stage))
         
@@ -83,11 +82,15 @@ def entree_utilisateur(entree,essais):
     '''  
     txt = []
     entree = entree.lower()
-    if len(entree) > 1:
+    if len(entree) > 1 and len(entree) < 3:
         txt = [item.split('-') for item in essais]
         txt = [item for l in entree for item in l]
-        if txt not in essais:
-            return txt
+        #txt =[txt.remove(item) for item in txt if item in entree] 
+        for e in txt:
+            if e in entree:
+                txt.remove(e)
+        print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 2 carcteres à la fois !',Flush=False))
+        return txt
     if entree not in essais:
         return entree
     print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère',Flush=False))
@@ -119,8 +122,9 @@ def main():
                 print('votre taux de reussite est de : ', taux_reussite, '%')
                 if total > 0 : 
                     Re = 'Re'
-                else:
-                    break
+            else:
+                print('au revoir !')
+                break
         except OSError: #si la reponse passe pas, on sait jamais ! 
             break
 
