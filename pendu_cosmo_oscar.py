@@ -118,6 +118,7 @@ def main():
                 mot = jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) 
                 if mot == 'Victoire':
                     effectif_victoire += 1
+                    print(' \n Victoire ! Bien joué ;)')
                 else:
                     print(f"Défaite, désole ca sera pour la prochaine fois ;) \n le mot était \033[1m{mot}\033[0m")
                 total += 1
