@@ -70,7 +70,7 @@ def jeu_pendu(niveau):
             stage -=1
         print('\n','mot substitué : ',' '.join(mot_substitue))
         print("\033[94m {}\033[00m" .format(f"il reste {stage} essais"))
-        # OU : sys.stdout.write(f"il reste {stage} essais")
+        #sys.stdout.write(f"il reste {stage} essais")
         print(dessinPendu(6-stage))
         
    #-------------------------------------------------------------------------
@@ -115,7 +115,11 @@ def main():
         try:
             if input(f'voulez vous {Re}jouer au pendu? [o/n]') == 'o':
                 print('\n bonne chance ! \n\n ==> petite astuce : commencez par les voyelles ! ')
-                mot = jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) 
+                try : 
+                    mot = jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) 
+                except ValueError:
+                    print('veuillez rentrer un niveau valide')
+                    continue
                 if mot == 'Victoire':
                     effectif_victoire += 1
                     print(' \n Victoire ! Bien joué ;)')
