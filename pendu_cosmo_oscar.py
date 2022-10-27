@@ -6,6 +6,7 @@ mot_mystere : STRING , mot tiré au hasard
 
 """
 import os
+import sys # si l'utilisateur est sur windows, il faudra utiliser cette librairie pour le formatage de sortie
 os.system("") # sur windows, pour activer les séquences de sortie ANSI(mise en forme)
 from random import randint
 from pendu_initial_eleves import dessinPendu #pour suimplifier la lecture, j'importe les pendus
@@ -69,6 +70,7 @@ def jeu_pendu(niveau):
             stage -=1
         print('\n','mot substitué : ',' '.join(mot_substitue))
         print("\033[94m {}\033[00m" .format(f"il reste {stage} essais"))
+        # OU : sys.stdout.write(f"il reste {stage} essais")
         print(dessinPendu(6-stage))
         
    #-------------------------------------------------------------------------
@@ -87,13 +89,14 @@ def entree_utilisateur(entree,essais):
         txt = [item for l in entree for item in l]
         #txt =[txt.remove(item) for item in txt if item in entree] 
         for e in txt:
-            if e in entree:
+            if e in essais:
                 txt.remove(e)
         print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 2 carcteres à la fois !',Flush=False))
         return txt
     if entree not in essais:
         return entree
     print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère',Flush=False))
+    # OU sys.stderr.write('caractère déja essayé ! veuillez rentrer un autre caractère')
     return ''
     #-----------------------------------------------------------------
 
