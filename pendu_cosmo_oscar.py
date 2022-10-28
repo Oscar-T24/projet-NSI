@@ -23,10 +23,12 @@ def jeu_pendu(niveau):
     
     liste_mots = fichier.readlines()
     fichier.close()
+    global mot_mystere
     mot_mystere = (liste_mots[randint(1,323470)])
     while len(mot_mystere) > (niveau+4)*(niveau+2) or len(mot_mystere) < (niveau+2)*(niveau+2):
         mot_mystere = (liste_mots[randint(1,323470)])
     # ====== FAIRE UNE BPUCLE WHILE QUI REGARDE LE NOMBRE DE DISPARITE ENTRE CARACTERES EN FONCTION DE LA DIFFICULT2
+    global mot_trouve
     mot_trouve = []
 
     for i in mot_mystere[0:-1]: # j'ajoute le -1 pour pas que le nombre d'underscore depasse le nombre de caracteres
@@ -36,8 +38,8 @@ def jeu_pendu(niveau):
             mot_trouve.append('_')
     # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)...
     print(' '.join(mot_trouve))
-    #print(' '.join(mot_mystere)) juste pour le test 
-    caracteres_essai = [] 
+    print(' '.join(mot_mystere)) #juste pour le test 
+    caracteres_essai = []
     mot_substitue = len(mot_mystere)*['']
     old_mot_subsitue = 0
     stage = 6#+(2-niveau)
@@ -86,16 +88,24 @@ def entree_utilisateur(entree,essais):
     renvoi un message d'erreur si l'utilisateur a déja rentré un caractere precedent(dans les essais)
     '''  
     txt = []
+    if entree.isalpha() == False:
+        print("\033[31m {}\033[00m" .format(f'veuillez entrer un caractere alphabétique valide \n( à noter que les mots ne contiennent pas d"accent)'))       
+        return ''
+    if 'guess' in entree:
+        return guess()
     entree = entree.lower()
     if len(entree) > 1 : 
-        txt = [item.split('-') for item in essais]
-        txt = [item for l in entree for item in l]
+        #txt = [item.split('-') for item in essais]
+        #txt = [item for l in entree for item in l]
         #txt =[txt.remove(item) for item in txt if item in entree] 
-        #print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !',Flush=False))
+        print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !',Flush=False))
+        return ''
         # =======================================!!!!!!!!
+        '''
         for e in txt:
             essais.extend(list(entree_utilisateur(e,essais))) 
             essais = [essais.remove(e) for e in essais if essais.count(e) > 1]
+        '''
         #========================================!!!!!!!!
     if entree not in essais:
         return entree
@@ -118,7 +128,7 @@ def main():
     while True:
         try:
             if input(f'voulez vous {Re}jouer au pendu? [o/n]') == 'o':
-                print('\n bonne chance ! \n\n ==> petite astuce : commencez par les voyelles ! ')
+                print('\n bonne chance ! \n\n ==> petite astuce : commencez par les voyelles ! \n à tout moment,si vous souhaiter tenter de deviner le mot dans son integralité, tapez "guess" pour accéder à la commande dediée')
                 try : 
                     mot = jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) 
                 except ValueError:
@@ -141,4 +151,11 @@ def main():
             break
 
 #========================================================================================  
+def guess():
+    guess = input('\n vous avez entré la commande GUESS : veuillez entrez votre guess').strip()
+    if mot_mystere == (guess+'\n'):
+        return list(mot_mystere)
+    else:
+        print(' \n mauvais mot!\n')
+    return ''
 main()
