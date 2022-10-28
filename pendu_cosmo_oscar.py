@@ -45,12 +45,15 @@ def jeu_pendu(niveau):
         n = len(caracteres_essai)
         old_mot_substitue = mot_substitue.count('')
         #print('comptt:',old_mot_substitue)
-        # ---------------- ENTREE DES CARACTERES --------------------------
+        # ---------------- ENTREE DES CARACTERES ----------------------
         while True:
             old_mot_substitue = mot_substitue.count('')
             caracteres_essai.extend(list(entree_utilisateur(input("entrez un caractère     "),caracteres_essai)))
             caracteres_essai = [i for i in caracteres_essai if i != '']
-            
+            #caracteres_essai = [caracteres_essai.remove(e) for e in caracteres_essai if caracteres_essai.count(e) > 1]
+            for e in caracteres_essai:
+                if caracteres_essai.count(e) > 1:
+                    caracteres_essai.remove(e)
             print("carctères déja essayés : ",caracteres_essai)
             if len(caracteres_essai) > n:
                 break
@@ -84,18 +87,19 @@ def entree_utilisateur(entree,essais):
     '''  
     txt = []
     entree = entree.lower()
-    if len(entree) > 1 and len(entree) < 3:
+    if len(entree) > 1 : 
         txt = [item.split('-') for item in essais]
         txt = [item for l in entree for item in l]
         #txt =[txt.remove(item) for item in txt if item in entree] 
+        #print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !',Flush=False))
+        # =======================================!!!!!!!!
         for e in txt:
-            if e in essais:
-                txt.remove(e)
-        print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 2 carcteres à la fois !',Flush=False))
-        return txt
+            essais.extend(list(entree_utilisateur(e,essais))) 
+            essais = [essais.remove(e) for e in essais if essais.count(e) > 1]
+        #========================================!!!!!!!!
     if entree not in essais:
         return entree
-    print("\033[31m {}\033[00m" .format('caractère déja essayé ! veuillez rentrer un autre caractère',Flush=False))
+    print("\033[31m {}\033[00m" .format(f'caractère {entree} déja essayé ! veuillez rentrer un autre caractère',Flush=False))
     # OU sys.stderr.write('caractère déja essayé ! veuillez rentrer un autre caractère')
     return ''
     #-----------------------------------------------------------------
