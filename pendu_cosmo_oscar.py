@@ -6,6 +6,10 @@ mot_mystere : STRING , mot tiré au hasard
 
 """
 import os
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
+# du code pour vider l'écran : WINDOWS utilise cls tandis que MAC et LINUX utilisent clear : cette commande est cross-plateforme!
+
 import sys # si l'utilisateur est sur windows, il faudra utiliser cette librairie pour le formatage de sortie
 os.system("") # sur windows, pour activer les séquences de sortie ANSI(mise en forme)
 from random import randint
@@ -38,7 +42,7 @@ def jeu_pendu(niveau):
             mot_trouve.append('_')
     # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)...
     print(' '.join(mot_trouve))
-    print(' '.join(mot_mystere)) #juste pour le test 
+    #print(' '.join(mot_mystere)) #juste pour le test 
     caracteres_essai = []
     mot_substitue = len(mot_mystere)*['']
     old_mot_subsitue = 0
@@ -60,7 +64,7 @@ def jeu_pendu(niveau):
             if len(caracteres_essai) > n:
                 break
         # ---------------------------------------------------------------------
-        print('', flush=False)
+        cls()
         for i in range(len(mot_mystere)):
             print(" _ ", end = ''), # cette partie induit en erreur, car les underscores devraint correpondre aux caracteres manquant et non pas aux espaces vides
             for e in caracteres_essai:
@@ -98,7 +102,7 @@ def entree_utilisateur(entree,essais):
         #txt = [item.split('-') for item in essais]
         #txt = [item for l in entree for item in l]
         #txt =[txt.remove(item) for item in txt if item in entree] 
-        print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !',Flush=False))
+        print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !'))
         return ''
         # =======================================!!!!!!!!
         '''
@@ -109,7 +113,7 @@ def entree_utilisateur(entree,essais):
         #========================================!!!!!!!!
     if entree not in essais:
         return entree
-    print("\033[31m {}\033[00m" .format(f'caractère {entree} déja essayé ! veuillez rentrer un autre caractère',Flush=False))
+    print("\033[31m {}\033[00m" .format(f'caractère {entree} déja essayé ! veuillez rentrer un autre caractère'))
     # OU sys.stderr.write('caractère déja essayé ! veuillez rentrer un autre caractère')
     return ''
     #-----------------------------------------------------------------
@@ -131,6 +135,7 @@ def main():
                 print('\n bonne chance ! \n\n ==> petite astuce : commencez par les voyelles ! \n à tout moment,si vous souhaiter tenter de deviner le mot dans son integralité, tapez "guess" pour accéder à la commande dediée')
                 try : 
                     mot = jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) 
+                    cls()
                 except ValueError:
                     print('veuillez rentrer un niveau valide')
                     continue
