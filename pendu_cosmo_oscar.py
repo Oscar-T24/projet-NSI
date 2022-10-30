@@ -71,6 +71,7 @@ def jeu_pendu(niveau):
                 if mot_mystere[i] == e or e == mot_mystere[i]:                   
                     print(mot_mystere[i].upper(), end = ''),
                     mot_substitue[i] = mot_mystere[i] 
+            #print("_", end = '')
         #print('nouveau compte',mot_substitue.count(''))
                 
         #si aucun mot n'a été trouvé comme bon entre temps, alors il n'y aura pas moins de ' ' dans mot_susbtitue
@@ -153,6 +154,7 @@ def main():
                 print('au revoir !')
                 break
         except OSError: #si la reponse passe pas, on sait jamais ! 
+            print('probleme d"entrée')
             break
 
 #========================================================================================  
