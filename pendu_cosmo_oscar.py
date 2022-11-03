@@ -1,8 +1,14 @@
-#code du jeu de pendu
-# ATTENTION LA MISE EN FORME DU CODE NE FONCTIONNE QUE SUR LINUX, MAC(quelque soit l'editeur)
-# WINDOWS ==> utiliser VScode 
+#code du jeu de pendu , fait par Oscar et Cosmo
+
+# WINDOWS : NE FONCTIONNE PAS SUR IDLE : UTILISER POWERSHELL(car l'invite de commande ne fonctionne pas)
 """
 mot_mystere : STRING , mot tiré au hasard
+mot_trouve : LIST , caracteres décomposés de mot_mystere
+caracteres_essais : LIST , caracteres DEJA essayés par l'utilisateur
+mot_substitue + old_mot_substitue : STRING , deux chaines de caracteres permettant de connaitre l'écolution de l'utilisateur
+stage : INTEGER , donne l'avancement de l'utilisateur
+entree : STRING , caractere entré par l'utilisateur
+
 
 """
 import os
@@ -43,7 +49,9 @@ def jeu_pendu(niveau):
     # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)...
     print(' '.join(mot_trouve))
     #print(' '.join(mot_mystere)) #juste pour le test 
+    global caracteres_essai
     caracteres_essai = []
+    global mot_substitue #global permet d'utiliser une variable dans n'importe quelle fonction du code
     mot_substitue = len(mot_mystere)*['']
     old_mot_subsitue = 0
     stage = 6#+(2-niveau)
@@ -65,12 +73,12 @@ def jeu_pendu(niveau):
                 break
         # ---------------------------------------------------------------------
         cls()
-        for i in range(len(mot_mystere)):
-            print(" _ ", end = ''), # cette partie induit en erreur, car les underscores devraint correpondre aux caracteres manquant et non pas aux espaces vides
-            for e in caracteres_essai:
-                if mot_mystere[i] == e or e == mot_mystere[i]:                   
-                    print(mot_mystere[i].upper(), end = ''),
-                    mot_substitue[i] = mot_mystere[i] 
+        
+        for i in range(len(mot_mystere)): # ok jusqu'ici
+            if actualisation(i) == True:
+                print(' '+mot_mystere[i], end = ' '),
+            else:
+                print(" _", end = ' '), 
             #print("_", end = '')
         #print('nouveau compte',mot_substitue.count(''))
                 
@@ -78,7 +86,7 @@ def jeu_pendu(niveau):
         #print(old_mot_substitue, ' VS' , mot_substitue.count(''))
         if old_mot_substitue == mot_substitue.count(''):
             stage -=1
-        print('\n','mot substitué : ',' '.join(mot_substitue))
+        # <===== pour le test uniquement ====> print('\n','mot substitué : ',' '.join(mot_substitue))
         print("\033[94m {}\033[00m" .format(f"il reste {stage} essais"))
         #sys.stdout.write(f"il reste {stage} essais")
         print(dessinPendu(6-stage))
@@ -133,7 +141,7 @@ def main():
     while True:
         try:
             if input(f'voulez vous {Re}jouer au pendu? [o/n]') == 'o':
-                print('\n bonne chance ! \n\n ==> petite astuce : commencez par les voyelles ! \n à tout moment,si vous souhaiter tenter de deviner le mot dans son integralité, tapez "guess" pour accéder à la commande dediée')
+                print('\n bonne chance ! \n\n ==> petite astuce : commencez par les voyelles ! \n à tout moment,si vous souhaiter tenter de deviner le mot dans son integralité, tapez "guess" pour accéder à la commande dediée \n \n')
                 try : 
                     mot = jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) 
                     cls()
@@ -159,10 +167,26 @@ def main():
 
 #========================================================================================  
 def guess():
+    '''
+    commande utile qui permet de rentrer un mot deviné
+    --> Str
+    '''
     guess = input('\n vous avez entré la commande GUESS : veuillez entrez votre guess').strip()
     if mot_mystere == (guess+'\n'):
         return list(mot_mystere)
     else:
         print(' \n mauvais mot!\n')
     return ''
+
+def actualisation(i):
+    '''
+    actualise le mot trouvé par l'utilisateur en prennant le caractere i de 
+    la liste mot_mystere en comparaison du caractere fourni par l'utilisateur 
+    pour l'afficher, ou le cas contraire mettre un underscore
+    --> bool
+    '''
+    for e in caracteres_essai:
+                if mot_mystere[i] == e or e == mot_mystere[i]:
+                    mot_substitue[i] = mot_mystere[i] 
+                    return True
 main()
