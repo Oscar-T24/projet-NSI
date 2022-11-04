@@ -68,7 +68,7 @@ def jeu_pendu(niveau):
             print(f"\nLa lettre '{l}' n'est pas dans le mot a deviner.")
             #print(dessinPendu(stage)) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
             # l’état du pendu
-        print(dessinPendu(stage), f'il reste {7-stage} essais') # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
+        print(dessinPendu(stage),"\033[94m {}\033[00m" .format(f" \n il reste {7-stage} essais")) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
         print(' '.join(mot_trouve)) # afficher l’état d’avancement de mot_trouve
         L += l
         print("\nCarctères déja essayés: ",' // '.join(L)) # les lettres du mot déjà devinées
@@ -112,8 +112,10 @@ def main():
             try:                
                 if jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) == 'Victoire':
                     effectif_victoire += 1
+                    cls()
                     print(f"Le mot a trouver était bien '{jeu_pendu.var}' \n Victoire ! \n") # terminer le jeu si toutes les lettres du mot ont été trouvées.
                 else:
+                    cls()
                     print(f"Défaite, désole ca sera pour la prochaine fois ;-) \n le mot était \033[1m{jeu_pendu.var}\033[0m \n \n")
                 total += 1
                 pourcentage_victoire = round(effectif_victoire * 100 / total)
