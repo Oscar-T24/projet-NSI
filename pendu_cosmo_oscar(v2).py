@@ -1,11 +1,11 @@
 #code du jeu de pendu , fait par Oscar et Cosmo
 
+# REMPLACER LA METHODE DE NEW ET OLD mot_trouve en redifinissant mot_trouve à chaque tour pour observer l'evolution de l'utilisateur
 # WINDOWS : NE FONCTIONNE PAS SUR IDLE : UTILISER POWERSHELL(car l'invite de commande ne fonctionne pas)
 """
 mot_mystere : STRING , mot tiré au hasard
-mot_trouve : LIST , caracteres décomposés de mot_mystere
-caracteres_essais : LIST , caracteres DEJA essayés par l'utilisateur
-mot_substitue + old_mot_substitue : STRING , deux chaines de caracteres permettant de connaitre l'écolution de l'utilisateur
+caractere_trouve : LIST , caracteres trouves par l'utilisateur
+mot_trouve + old_mot_trouve : STRING , deux chaines de caracteres permettant de connaitre l'écolution de l'utilisateur
 stage : INTEGER , donne l'avancement de l'utilisateur
 entree : STRING , caractere entré par l'utilisateur
 
@@ -26,7 +26,7 @@ def jeu_pendu(niveau):
     '''
     lance le jeu du pendu et renvoi 'victoire' ou 'défaite'
     tire au hasard un mots parmis ceux de 'mots.txt' et le stocke dans 'mot_mystere'
-    la stocke ensuite dans une liste de caractere 'mot_trouve'
+    la stocke ensuite dans une liste de caractere 'caractere_trouve'
     demande à l'utilisateur une lettre
     None
     '''
@@ -39,42 +39,41 @@ def jeu_pendu(niveau):
     while len(mot_mystere) > (niveau+4)*(niveau+2) or len(mot_mystere) < (niveau+2)*(niveau+2):
         mot_mystere = (liste_mots[randint(1,323470)])
     # ====== FAIRE UNE BPUCLE WHILE QUI REGARDE LE NOMBRE DE DISPARITE ENTRE CARACTERES EN FONCTION DE LA DIFFICULT2
-    global mot_trouve
-    mot_trouve = []
+    global caractere_trouve
+    caractere_trouve = []
 
     for i in mot_mystere[0:-1]: # j'ajoute le -1 pour pas que le nombre d'underscore depasse le nombre de caracteres
         if i == '-':
-            mot_trouve.append("-")
+            caractere_trouve.append("-")
         else:
-            mot_trouve.append('_')
+            caractere_trouve.append('_')
     # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)...
-    print(' '.join(mot_trouve))
-    mot_trouve = []
+    print(' '.join(caractere_trouve))
+    caractere_trouve = []
     #print(' '.join(mot_mystere)) #juste pour le test 
-    global mot_trouve
-    mot_trouve = []
-    global mot_substitue #global permet d'utiliser une variable dans n'importe quelle fonction du code
-    mot_substitue = len(mot_mystere)*['']
+    caractere_trouve = []
+    global mot_trouve #global permet d'utiliser une variable dans n'importe quelle fonction du code
+    mot_trouve = len(mot_mystere)*['']
     old_mot_subsitue = 0
     stage = 6#+(2-niveau)
-    while stage != 0 and (' '.join(mot_substitue)).rstrip() != (' '.join(mot_mystere).rstrip()): # condition de jeu : tant que l'utilisateur n'a pas envcore gangé ou perdu
-        n = len(mot_trouve)
-        old_mot_substitue = mot_substitue.count('')
-        #print('comptt:',old_mot_substitue)
+    while stage != 0 and (' '.join(mot_trouve)).rstrip() != (' '.join(mot_mystere).rstrip()): # condition de jeu : tant que l'utilisateur n'a pas envcore gangé ou perdu
+        n = len(caractere_trouve)
+        old_mot_trouve = mot_trouve.count('')
+        #print('comptt:',old_mot_trouve)
         # ---------------- ENTREE DES CARACTERES ----------------------
         while True:
-            old_mot_substitue = mot_substitue.count('')
-            mot_trouve.extend(list(entree_utilisateur(input("entrez un caractère     "),mot_trouve)))
-            mot_trouve = [i for i in mot_trouve if i != '']
-            #mot_trouve = [mot_trouve.remove(e) for e in mot_trouve if mot_trouve.count(e) > 1]
-            for e in mot_trouve:
-                if mot_trouve.count(e) > 1:
-                    mot_trouve.remove(e)
-            print("carctères déja essayés : ",mot_trouve)
-            if len(mot_trouve) > n:
+            old_mot_trouve = mot_trouve.count('')
+            caractere_trouve.extend(list(entree_utilisateur(input("entrez un caractère     "),caractere_trouve)))
+            caractere_trouve = [i for i in caractere_trouve if i != '']
+            #caractere_trouve = [caractere_trouve.remove(e) for e in caractere_trouve if caractere_trouve.count(e) > 1]
+            for e in caractere_trouve:
+                if caractere_trouve.count(e) > 1:
+                    caractere_trouve.remove(e)
+            if len(caractere_trouve) > n:
                 break
         # ---------------------------------------------------------------------
         cls()
+        print("carctères déja essayés : ",caractere_trouve)
         
         for i in range(len(mot_mystere)): # ok jusqu'ici
             if actualisation(i) == True:
@@ -82,22 +81,22 @@ def jeu_pendu(niveau):
             else:
                 print(" _", end = ' '), 
             #print("_", end = '')
-        #print('nouveau compte',mot_substitue.count(''))
+        #print('nouveau compte',mot_trouve.count(''))
                 
         #si aucun mot n'a été trouvé comme bon entre temps, alors il n'y aura pas moins de ' ' dans mot_susbtitue
-        #print(old_mot_substitue, ' VS' , mot_substitue.count(''))
-        if old_mot_substitue == mot_substitue.count(''):
+        #print(old_mot_trouve, ' VS' , mot_trouve.count(''))
+        if old_mot_trouve == mot_trouve.count(''):
             stage -=1
-        # <===== pour le test uniquement ====> print('\n','mot substitué : ',' '.join(mot_substitue))
+        # <===== pour le test uniquement ====> print('\n','mot substitué : ',' '.join(mot_trouve))
         print("\033[94m {}\033[00m" .format(f"il reste {stage} essais"))
         #sys.stdout.write(f"il reste {stage} essais")
         print(dessinPendu(6-stage))
         
    #-------------------------------------------------------------------------
-    if (' '.join(mot_substitue)).rstrip() == (' '.join(mot_mystere).rstrip()):
+    if (' '.join(mot_trouve)).rstrip() == (' '.join(mot_mystere).rstrip()):
         return 'Victoire'
     return mot_mystere
-def entree_utilisateur(entree,essais): #def miseajour_mot(mot_mystere,mot_trouve,l)
+def entree_utilisateur(entree,essais): #def miseajour_mot(mot_mystere,caractere_trouve,l)
     '''
     actualise la liste des caracteres donnés par l'utilisateur(entree) en supprimant les doublons
     renvoi un message d'erreur si l'utilisateur a déja rentré un caractere precedent(dans les essais)
@@ -186,8 +185,8 @@ def actualisation(i):
     pour l'afficher, ou le cas contraire mettre un underscore
     --> bool
     '''
-    for e in mot_trouve:
+    for e in caractere_trouve:
                 if mot_mystere[i] == e or e == mot_mystere[i]:
-                    mot_substitue[i] = mot_mystere[i] 
+                    mot_trouve[i] = mot_mystere[i] 
                     return True
 main()
