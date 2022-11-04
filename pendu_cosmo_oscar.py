@@ -51,7 +51,12 @@ def jeu_pendu(niveau):
     print(' '.join(mot_trouve))
     mot_trouve = []
     #print(' '.join(mot_mystere)) #juste pour le test 
+    global mot_trouve 
+    '''
+    ... , line 54
     global mot_trouve
+    ^^^^^^^^^^^^^^^^^
+    SyntaxError: name 'mot_trouve' is used prior to global declaration'''
     mot_trouve = []
     global mot_substitue #global permet d'utiliser une variable dans n'importe quelle fonction du code
     mot_substitue = len(mot_mystere)*['']
