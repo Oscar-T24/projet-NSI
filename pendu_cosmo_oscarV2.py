@@ -75,7 +75,7 @@ def jeu_pendu(niveau):
         cls()
         print("carctères déja essayés : ",caractere_trouve)
         
-        for i in range(len(mot_mystere)): # ok jusqu'ici
+        for i in range(len(mot_mystere)-1): # ok jusqu'ici
             if actualisation(i) == True:
                 print(' '+mot_mystere[i], end = ' '),
             else:
