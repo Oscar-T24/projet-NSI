@@ -1,9 +1,15 @@
 from random import randint
 from pendu_initial_eleves import dessinPendu
 import os
-import sys
+import time
 os.system("") # variment utile?
-
+def cls():
+    '''
+    nettoie le 'buffer' de l'ecran pour plus de lisibilité
+    None
+    '''
+    os.system('cls' if os.name=='nt' else 'clear')
+    #print ("\n" * 100)
 def jeu_pendu(niveau):
     
     fichier = open("mots.txt",'r')
@@ -27,7 +33,7 @@ def jeu_pendu(niveau):
     
     print(" *----------LE JEU DU PENDU:----------* \n Si a tout moment vous souhaitez deviner le mot dans son integralité \n tapez 'guess' ")
     print(' '.join(mot_trouve))
-    print(mot_mystere) # option triche #
+    print(mot_mystere) # OPTION TRICHE A RETIRER 
     
     stage = 0
     L = []
@@ -49,24 +55,26 @@ def jeu_pendu(niveau):
             print("\033[31m {}\033[00m".format(f"le caractère '{l}' n'est pas dans l'alphabet ! Notez que les mots ne contiennent pas de caracteres spéciaux"))       
             continue
         
-        # verifications du caractere entré, auquel cas ou il y aurait un probleme passer la boucle active
 
+        
+        # verifications du caractere entré, auquel cas ou il y aurait un probleme passer la boucle active
+        cls()
         if miseajour_mot(mot_mystere, mot_trouve, l) == True:
             print(f"La lettre '{l}' est bien dans le mot a deviner.")
-            if stage != 0:
-                print(dessinPendu(stage)) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
+            #if stage != 0:
                 # l’état du pendu   
         else:
             stage += 1
             print(f"\nLa lettre '{l}' n'est pas dans le mot a deviner.")
-            print(dessinPendu(stage)) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
+            #print(dessinPendu(stage)) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
             # l’état du pendu
-        
+        print(dessinPendu(stage), f'il reste {7-stage} essais') # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
         print(' '.join(mot_trouve)) # afficher l’état d’avancement de mot_trouve
         L += l
         print("\nCarctères déja essayés: ",' // '.join(L)) # les lettres du mot déjà devinées
         # affichant après chaque proposition
-        print("\n *-----------------------------------------------* \n")  
+        #print("\n *-----------------------------------------------* \n")  
+        
         
     jeu_pendu.var = (''.join(mot_mystere).rstrip()) # Pour pouvoir utiliser une variable locale dans une autre fonction
     
@@ -106,7 +114,7 @@ def main():
                     effectif_victoire += 1
                     print(f"Le mot a trouver était bien '{jeu_pendu.var}' \n Victoire ! \n") # terminer le jeu si toutes les lettres du mot ont été trouvées.
                 else:
-                    print(f"Défaite, désole ca sera pour la prochaine fois ;-) \n le mot était \033[1m{jeu_pendu.var}\033[0m")
+                    print(f"Défaite, désole ca sera pour la prochaine fois ;-) \n le mot était \033[1m{jeu_pendu.var}\033[0m \n \n")
                 total += 1
                 pourcentage_victoire = round(effectif_victoire * 100 / total)
                 print(f"Pourcentage de 'Victoire // Défaite': {pourcentage_victoire} % // {100-pourcentage_victoire} % ")
