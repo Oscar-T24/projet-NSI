@@ -4,15 +4,15 @@ import os
 import sys
 os.system("") # variment utile?
 
-global mot_mystere
-
 def jeu_pendu(niveau):
     
     fichier = open("mots.txt",'r')
     liste_mots = fichier.readlines()
-    fichier.close()
+    mot_mystere = ''
     while len(mot_mystere) > (niveau+4)*(niveau+2) or len(mot_mystere) < (niveau+2)*(niveau+2):
         mot_mystere = (liste_mots[randint(1,323470)])
+    
+    fichier.close()
     # l’ordinateur devra choisir un mot auhasard
     
     # mot_trouve = (len(mot_mystere)-1)*["_"] NE COMPTE PAS LES TRAITS D'UNIONS
