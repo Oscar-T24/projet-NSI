@@ -2,15 +2,17 @@ from random import randint
 from pendu_initial_eleves import dessinPendu
 import os
 import sys
-os.system("")
+os.system("") # variment utile?
 
-def jeu_pendu():
+global mot_mystere
+
+def jeu_pendu(niveau):
     
     fichier = open("mots.txt",'r')
     liste_mots = fichier.readlines()
     fichier.close()
-
-    mot_mystere = (liste_mots[randint(1,323470)]) # tirer au hasard un mot appelé ensuite mot_mystere dans le fichier mots.txt
+    while len(mot_mystere) > (niveau+4)*(niveau+2) or len(mot_mystere) < (niveau+2)*(niveau+2):
+        mot_mystere = (liste_mots[randint(1,323470)])
     # l’ordinateur devra choisir un mot auhasard
     
     # mot_trouve = (len(mot_mystere)-1)*["_"] NE COMPTE PAS LES TRAITS D'UNIONS
@@ -23,25 +25,31 @@ def jeu_pendu():
             mot_trouve.append('_')
     # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)... en utilisant des tirets pour les lettres inconnues
     
-    print(" *----------LE JEU DU PENDU:----------* \n")
+    print(" *----------LE JEU DU PENDU:----------* \n Si a tout moment vous souhaitez deviner le mot dans son integralité \n tapez 'guess' ")
     print(' '.join(mot_trouve))
     print(mot_mystere) # option triche #
     
     stage = 0
     L = []
 
-    
     while stage < 6 and (''.join(mot_trouve)).rstrip() != (''.join(mot_mystere).rstrip()): # Tant que le pendu n'est pas finit et que le mot ne sois pas trouvé...
 
-        l = input("entrez un caractère: ") # demander au joueur une lettre
-        # demander des lettres à l’utilisateur
-        l = l.lower()
-
-        for i in range(len(L)):
-            while L[i] == l:
-                print("\033[31m {}\033[00m".format(f"caractère {l} déja essayé ! veuillez rentrer un autre caractère"))
-                l = input("entrez un nouveau caractère: ")
- # Porblème: si l'on entre une lettre déjà essayée puis une différente lettre déjà essayé AVANT, dans la list "L" qui est celle des "Carctères déja essayés", cette lettre est repris en compte
+        l = input("entrez un caractère: ").lower() # demander au joueur une lettre
+        if len(l) > 1:
+            print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !'))
+            if l == 'guess':
+                if input('\n vous avez entré la commande GUESS. Veuillez entrez votre guess : ').strip() == (''.join(mot_mystere).rstrip()):
+                    break # attention 
+                print('mauvais mot ! Bien essayé quand meme')
+            continue
+        if l in L:
+            print("\033[31m {}\033[00m".format(f"caractère '{l}' déja essayé ! veuillez rentrer un autre caractère"))
+            continue
+        if l.isalpha() == False:
+            print("\033[31m {}\033[00m".format(f"le caractère '{l}' n'est pas dans l'alphabet ! Notez que les mots ne contiennent pas de caracteres spéciaux"))       
+            continue
+        
+        # verifications du caractere entré, auquel cas ou il y aurait un probleme passer la boucle active
 
         if miseajour_mot(mot_mystere, mot_trouve, l) == True:
             print(f"La lettre '{l}' est bien dans le mot a deviner.")
@@ -59,8 +67,9 @@ def jeu_pendu():
         print("\nCarctères déja essayés: ",' // '.join(L)) # les lettres du mot déjà devinées
         # affichant après chaque proposition
         print("\n *-----------------------------------------------* \n")  
-    
+        
     jeu_pendu.var = (''.join(mot_mystere).rstrip()) # Pour pouvoir utiliser une variable locale dans une autre fonction
+    
     if stage < 6:
         return 'Victoire'
     else:
@@ -80,7 +89,7 @@ def miseajour_mot(mot_mystere, mot_trouve, l):
         return True
     else: 
         return False
-
+        
 def main():
     """
     execute le code principal 
@@ -88,19 +97,23 @@ def main():
     pourcentage_victoire = 0
     effectif_victoire = 0
     total = 0
-    re = ''         
+    re = ''     
+    difficulté = ['facile','moyen','difficile']  
     while True:
         if input(f"voulez vous {re}jouer au pendu? [o/n]: ") == "o":
-            if jeu_pendu() == 'Victoire':
-                effectif_victoire += 1
-                print(f"Le mot a trouver était bien '{jeu_pendu.var}' \n Victoire ! \n") # terminer le jeu si toutes les lettres du mot ont été trouvées.
-            else:
-                print(f"Défaite, désole ca sera pour la prochaine fois ;-) \n le mot était \033[1m{jeu_pendu.var}\033[0m")
-            total += 1
-            pourcentage_victoire = round(effectif_victoire * 100 / total)
-            print(f"Pourcentage de 'Victoire // Défaite': {pourcentage_victoire} % // {100-pourcentage_victoire} % ")
-            if total > 0 : 
-                re = 're'
+            try:                
+                if jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) == 'Victoire':
+                    effectif_victoire += 1
+                    print(f"Le mot a trouver était bien '{jeu_pendu.var}' \n Victoire ! \n") # terminer le jeu si toutes les lettres du mot ont été trouvées.
+                else:
+                    print(f"Défaite, désole ca sera pour la prochaine fois ;-) \n le mot était \033[1m{jeu_pendu.var}\033[0m")
+                total += 1
+                pourcentage_victoire = round(effectif_victoire * 100 / total)
+                print(f"Pourcentage de 'Victoire // Défaite': {pourcentage_victoire} % // {100-pourcentage_victoire} % ")
+                if total > 0 : 
+                    re = 're'
+            except ValueError:
+                print('veuillez entrer un niveau valide')
         else:
             print('au revoir !')
             break
