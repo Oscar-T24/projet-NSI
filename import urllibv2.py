@@ -2,14 +2,15 @@ import urllib.request
 import json
 import time
 from pprint import pprint
-import re
 
 while True:
   #TS = urllib.request.urlopen("https://api.thingspeak.com/channels/1922406/feeds.json?results=1")
   TS = urllib.request.urlopen(" https://api.thingspeak.com/channels/1922406/fields/1.json?api_key=XEPU2C2CXF5SWCMM&results=2")
+  global e
+  e = 0
   response = TS.read()
   data=json.loads(response)
-  pprint(data) 
+  pprint(data)
   b = data['channel']['field1']
   print('==========================')
   print(b)
@@ -19,19 +20,22 @@ while True:
   print(type(a))
   print(len(a))
   valeurfinale = []
-  for i in range(120,len(a)):
-    if a[i] == 'f' and len(a) - i > 10:
-        if a[i+10] != ' ':
-                #e = a.index('field1')+10
-            e = i+10
-            indexfinal = e
-            while True:
+  for i in range(110,len(a)):
+    if a[i] == 'f':
+        #e = a.index('field1')+10
+        e = i+10
+        indexfinal = e
+        while True:
+            try : 
                 if a[indexfinal] == "'":
                     break
-                indexfinal +=1
+                indexfinal +=1    
+            except IndexError:
+                pass
+            
         #print('la valeur a index.9=',a[a.rindex('field1')+10:a.rindex('field1')+e])
-            print('la valeur a index.9=',a[e:indexfinal])
-            valeurfinale.append(a[e:indexfinal])
+        print('la valeur a index.9=',a[e:indexfinal])
+        valeurfinale.append(a[e:indexfinal])
     
        
     #print('field trouve à l"index', a.index('field1'))
@@ -43,12 +47,3 @@ while True:
     s = url.read()
     print('valeur envoyé')
 '''
- # faire un code ici qui sépare l'utilisateur de son score
-  dictionnaire_leadeboard = {}
-  for i in range(len(valeurfinale)):
-    strlist = ''
-    strlist = re.split('(\d+)', valeurfinale[i])
-    dictionnaire_leadeboard[strlist[0]] = strlist[1]
-  print(dictionnaire_leadeboard)
-#fIL FAUT FAIRE UN TRUC QUI CLASSE LE NIVEAU
-# PETIT PROBLEME IL S4AGIT D4UN FEED DONC SEULEMENT LES DEUX DERNIERES VALEURS SONT CONSERVEES
