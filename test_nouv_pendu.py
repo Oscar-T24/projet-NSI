@@ -4,6 +4,8 @@ from READ import lecture_serveur_TS
 from PARSING import publier_score
 import os
 import time
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
 def cls():
     '''
