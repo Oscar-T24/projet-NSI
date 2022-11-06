@@ -28,8 +28,6 @@ def jeu_pendu(niveau):
     fichier.close()
     # l’ordinateur devra choisir un mot auhasard
     
-    # mot_trouve = (len(mot_mystere)-1)*["_"] NE COMPTE PAS LES TRAITS D'UNIONS
-    
     mot_trouve = [] # définir mot_trouve comme une liste de caractères (et non comme une chaîne de caractères) de la longueur du mot à deviner
     for i in mot_mystere[0:-1]: # j'ajoute le -1 pour pas que le nombre d'underscore depasse le nombre de caracteres
         if i == '-':
@@ -38,7 +36,9 @@ def jeu_pendu(niveau):
             mot_trouve.append('_')
     # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)... en utilisant des tirets pour les lettres inconnues
     
-    print(" *----------LE JEU DU PENDU:----------* \n Si a tout moment vous souhaitez deviner le mot dans son integralité \n tapez 'guess' ")
+    cls()
+    
+    print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m", "❖ Si a tout moment vous souhaitez deviner le mot dans son integralité tapez 'guess' ❖ \n") 
     print(' '.join(mot_trouve))
     print(mot_mystere) # OPTION TRICHE A RETIRER 
     
@@ -50,9 +50,9 @@ def jeu_pendu(niveau):
         l = input("entrez un caractère: ").lower() # demander au joueur une lettre
         if len(l) > 1:
             if l == 'guess':
-                if input('\n vous avez entré la commande GUESS. Veuillez entrez votre guess : ').strip() == (''.join(mot_mystere).rstrip()):
+                if input('\n Vous avez entré la commande GUESS. Veuillez entrez votre guess : ').strip() == (''.join(mot_mystere).rstrip()):
                     break # attention 
-                print('mauvais mot ! Bien essayé quand meme')
+                print('Mauvais mot ! Bien essayé quand meme')
             else:
                 print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !'))
             continue
@@ -62,18 +62,17 @@ def jeu_pendu(niveau):
         if l.isalpha() == False:
             print("\033[31m {}\033[00m".format(f"le caractère '{l}' n'est pas dans l'alphabet ! Notez que les mots ne contiennent pas de caracteres spéciaux"))       
             continue
-        
 
-        
         # verifications du caractere entré, auquel cas ou il y aurait un probleme passer la boucle active
         cls()
+        print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m" .format())
         if miseajour_mot(mot_mystere, mot_trouve, l) == True:
             print(f"La lettre '{l}' est bien dans le mot a deviner.")
             #if stage != 0:
                 # l’état du pendu   
         else:
             stage += 1
-            print(f"\nLa lettre '{l}' n'est pas dans le mot a deviner.")
+            print(f"La lettre '{l}' n'est pas dans le mot a deviner.")
             #print(dessinPendu(stage)) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
             # l’état du pendu
         print(dessinPendu(stage),"\033[94m {}\033[00m" .format(f" \n il reste {7-stage} essais")) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
@@ -117,22 +116,23 @@ def main():
     re = ''     
     difficulté = ['facile','moyen','difficile']  
     while True:
-        if input(f"voulez vous {re}jouer au pendu? [o/n]: ") == "o":
+        if input(f"========================================\n➥ Voulez vous {re}jouer au pendu? [o/n]: ") == "o":
             try:                
-                if jeu_pendu(difficulté.index(input('quel niveau de difficulté choisissez vous?[facile, moyen, difficile]'))) == 'Victoire':
+                if jeu_pendu(difficulté.index(input('➥ Quel niveau de difficulté choisissez vous? [facile, moyen, difficile]: '))) == 'Victoire':
                     effectif_victoire += 1
                     cls()
+                    print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m" )
                     print(f"Le mot a trouver était bien '{jeu_pendu.var}' \n Victoire ! \n") # terminer le jeu si toutes les lettres du mot ont été trouvées.
                 else:
                     cls()
                     print(f"Défaite, désole ca sera pour la prochaine fois ;-) \n le mot était \033[1m{jeu_pendu.var}\033[0m \n \n")
                 total += 1
                 pourcentage_victoire = round(effectif_victoire * 100 / total)
-                print(f"Pourcentage de 'Victoire // Défaite': {pourcentage_victoire} % // {100-pourcentage_victoire} % ")
+                print(f"⭆\x1B[4m Pourcentage de 'Victoire // Défaite': \x1B[0m \n \n ⮑ [ {pourcentage_victoire} % // {100-pourcentage_victoire} % ]⮐ \n ")
                 niv+=2
                 score = int(total*niv)
-                print('votre score  :', score)
-                publier_score(input("veuillez entrez votre nom d'utilisateur en minuscule, en caratcres alphabétiques(sera utilisé pour le classement)"),score)
+                print(f"⭆\x1B[4m Votre score: \x1B[0m \n \n ⮑ [ {score} ]⮐ \n ")
+                publier_score(input("veuillez entrez votre nom d'utilisateur en minuscule, en caratcres alphabétiques(sera utilisé pour le classement): "),score)
                 lecture_serveur_TS()
                 if total > 0 : 
                     re = 're'
