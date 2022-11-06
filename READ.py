@@ -18,8 +18,8 @@ def lecture_serveur_TS():
   #print(type(a))
   #print(len(a))
   valeurfinale = []
-  for i in range(120,len(a)):
-    if a[i] == 'f' and len(a) - i > 10:
+  for i in range(120,len(a)-5):
+    if a[i:i+6] == 'field1' and len(a) - i > 10:     
         if a[i+10] != ' ':
                 #e = a.index('field1')+10
             e = i+10
@@ -61,7 +61,6 @@ def lecture_serveur_TS():
 #fIL FAUT FAIRE UN TRUC QUI CLASSE LE NIVEAU
 # PETIT PROBLEME IL S4AGIT D4UN FEED DONC SEULEMENT LES DEUX DERNIERES VALEURS SONT CONSERVEES
 # FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
-'''
+
 while True : 
   lecture_serveur_TS()
-'''
