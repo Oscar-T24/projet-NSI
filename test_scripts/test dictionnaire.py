@@ -2,7 +2,7 @@
 python_words = {}
 
 # Fill the dictionary, pair by pair.
-python_words['list'] = 
+python_words['list'] = 'A list'
 python_words['dictionary'] = 'A collection of key-value pairs.'
 python_words['function'] = 'A named set of instructions that defines a set of actions in Python.'
 
