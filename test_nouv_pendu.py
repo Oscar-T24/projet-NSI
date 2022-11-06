@@ -47,7 +47,7 @@ def jeu_pendu(niveau):
 
     while stage < 6 and (''.join(mot_trouve)).rstrip() != (''.join(mot_mystere).rstrip()): # Tant que le pendu n'est pas finit et que le mot ne sois pas trouvé...
 
-        l = input("entrez un caractère: ").lower() # demander au joueur une lettre
+        l = input("Entrez un caractère: ").lower() # demander au joueur une lettre
         if len(l) > 1:
             if l == 'guess':
                 if input('\n Vous avez entré la commande GUESS. Veuillez entrez votre guess : ').strip() == (''.join(mot_mystere).rstrip()):
@@ -65,7 +65,7 @@ def jeu_pendu(niveau):
 
         # verifications du caractere entré, auquel cas ou il y aurait un probleme passer la boucle active
         cls()
-        print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m" .format())
+        print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m")
         if miseajour_mot(mot_mystere, mot_trouve, l) == True:
             print(f"La lettre '{l}' est bien dans le mot a deviner.")
             #if stage != 0:
@@ -75,10 +75,10 @@ def jeu_pendu(niveau):
             print(f"La lettre '{l}' n'est pas dans le mot a deviner.")
             #print(dessinPendu(stage)) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
             # l’état du pendu
-        print(dessinPendu(stage),"\033[94m {}\033[00m" .format(f" \n il reste {7-stage} essais")) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
+        print(dessinPendu(stage),"\033[94m{}\033[00m" .format("\n Tu a le droit à " + str(abs(6-stage)) + " erreur" + ("s" if 6-stage > 1 else "") + " avant d'être pendu!\n")) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
         print(' '.join(mot_trouve)) # afficher l’état d’avancement de mot_trouve
         L += l
-        print("\nCarctères déja essayés: ",' // '.join(L)) # les lettres du mot déjà devinées
+        print("\nCarctères déja essayés: ║",' ║ '.join(L)) # les lettres du mot déjà devinées
         # affichant après chaque proposition
         #print("\n *-----------------------------------------------* \n")  
         
@@ -121,10 +121,11 @@ def main():
                 if jeu_pendu(difficulté.index(input('➥ Quel niveau de difficulté choisissez vous? [facile, moyen, difficile]: '))) == 'Victoire':
                     effectif_victoire += 1
                     cls()
-                    print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m" )
+                    print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m")
                     print(f"Le mot a trouver était bien '{jeu_pendu.var}' \n Victoire ! \n") # terminer le jeu si toutes les lettres du mot ont été trouvées.
                 else:
                     cls()
+                    print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m")
                     print(f"Défaite, désole ca sera pour la prochaine fois ;-) \n le mot était \033[1m{jeu_pendu.var}\033[0m \n \n")
                 total += 1
                 pourcentage_victoire = round(effectif_victoire * 100 / total)
@@ -132,7 +133,7 @@ def main():
                 niv+=2
                 score = int(total*niv)
                 print(f"⭆\x1B[4m Votre score: \x1B[0m \n \n ⮑ [ {score} ]⮐ \n ")
-                publier_score(input("veuillez entrez votre nom d'utilisateur en minuscule, en caratcres alphabétiques(sera utilisé pour le classement): "),score)
+                publier_score(input("Veuillez entrez votre nom d'utilisateur en minuscule, en caratcres alphabétiques (sera utilisé pour le classement): "),score)
                 lecture_serveur_TS()
                 if total > 0 : 
                     re = 're'
