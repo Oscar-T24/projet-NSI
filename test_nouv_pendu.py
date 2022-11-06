@@ -45,11 +45,12 @@ def jeu_pendu(niveau):
 
         l = input("entrez un caractère: ").lower() # demander au joueur une lettre
         if len(l) > 1:
-            print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !'))
             if l == 'guess':
                 if input('\n vous avez entré la commande GUESS. Veuillez entrez votre guess : ').strip() == (''.join(mot_mystere).rstrip()):
                     break # attention 
                 print('mauvais mot ! Bien essayé quand meme')
+            else:
+                print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !'))
             continue
         if l in L:
             print("\033[31m {}\033[00m".format(f"caractère '{l}' déja essayé ! veuillez rentrer un autre caractère"))
