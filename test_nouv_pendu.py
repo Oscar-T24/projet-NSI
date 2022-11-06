@@ -1,9 +1,10 @@
 from random import randint
 from pendu_initial_eleves import dessinPendu
 from READ import lecture_serveur_TS
+from PARSING import publier_score
 import os
 import time
-os.system("") # variment utile?
+
 def cls():
     '''
     nettoie le 'buffer' de l'ecran pour plus de lisibilité
@@ -12,7 +13,8 @@ def cls():
     os.system('cls' if os.name=='nt' else 'clear')
     #print ("\n" * 100)
 def jeu_pendu(niveau):
-    
+    global niv 
+    niv = niveau
     fichier = open("mots.txt",'r')
     liste_mots = fichier.readlines()
     mot_mystere = ''
@@ -100,6 +102,7 @@ def miseajour_mot(mot_mystere, mot_trouve, l):
         return False
         
 def main():
+    global niv
     """
     execute le code principal 
     """
@@ -121,6 +124,10 @@ def main():
                 total += 1
                 pourcentage_victoire = round(effectif_victoire * 100 / total)
                 print(f"Pourcentage de 'Victoire // Défaite': {pourcentage_victoire} % // {100-pourcentage_victoire} % ")
+                niv+=2
+                score = int(total*niv)
+                print('votre score  :', score)
+                publier_score(input("veuillez entrez votre nom d'utilisateur en minuscule, en caratcres alphabétiques(sera utilisé pour le classement)"),score)
                 lecture_serveur_TS()
                 if total > 0 : 
                     re = 're'
