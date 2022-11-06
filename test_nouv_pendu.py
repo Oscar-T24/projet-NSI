@@ -1,5 +1,6 @@
 from random import randint
 from pendu_initial_eleves import dessinPendu
+from READ import lecture_serveur_TS
 import os
 import time
 os.system("") # variment utile?
@@ -120,6 +121,7 @@ def main():
                 total += 1
                 pourcentage_victoire = round(effectif_victoire * 100 / total)
                 print(f"Pourcentage de 'Victoire // Défaite': {pourcentage_victoire} % // {100-pourcentage_victoire} % ")
+                lecture_serveur_TS()
                 if total > 0 : 
                     re = 're'
             except ValueError:
