@@ -6,7 +6,9 @@ import os
 import time
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
-
+# si le code bloque sur la biblioteque urllib sur Mac OS 
+    # ==> executer le fichier sur Machintosh HD > Applications > Pyhton 3.xx > Install Certificates.comman
+    # ce fichier debloque la decouverte ssl non certifié
 def cls():
     '''
     nettoie le 'buffer' de l'ecran pour plus de lisibilité
