@@ -65,13 +65,13 @@ def lecture_serveur_TS():
   dictionnaire_leadeboard2 = dict(sorted(dictionnaire_leadeboard.items(), key=lambda item: item[1], reverse= True))
   #print(dictionnaire_leadeboard2)
   
-  print('=============classement des scores récents classés par nombre de point========================')
+  print('\n<=============Classement des scores récents classés par nombre de point========================>')
   for key, value in dictionnaire_leadeboard2.items():
     if int(value) > 0:
-      print(key, ' : ', value)
+      print(key, ':', value)
   return 
-#fIL FAUT FAIRE UN TRUC QUI CLASSE LE NIVEAU
-# PETIT PROBLEME IL S4AGIT D4UN FEED DONC SEULEMENT LES DEUX DERNIERES VALEURS SONT CONSERVEES
+# IL FAUT FAIRE UN TRUC QUI CLASSE LE NIVEAU
+# PETIT, PROBLEME IL S'AGIT D'UN FEED DONC SEULEMENT LES DEUX DERNIERES VALEURS SONT CONSERVEES
 # FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
 
 while True : 
