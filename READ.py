@@ -1,8 +1,12 @@
+from unicodedata import name
 import urllib.request
 import json
 import time
 from pprint import pprint
 import re
+from PARSING import publier_score
+
+from PARSING import publier_score
 def lecture_serveur_TS():
   #TS = urllib.request.urlopen("https://api.thingspeak.com/channels/1922406/feeds.json?results=1")
   TS = urllib.request.urlopen(" https://api.thingspeak.com/channels/1922406/fields/1.json?api_key=XEPU2C2CXF5SWCMM&results=10") #on peux changer le nombre de variables recues avec reulsts
@@ -49,19 +53,34 @@ def lecture_serveur_TS():
     strlist = ''
     strlist = re.split('(\d+)', valeurfinale[i]) # PROBLEME ICI
     strlist.pop(2)
+    print(strlist)
     nometscore.append(strlist)
     #ajouter un script qui supprime les doublons
     dictionnaire_leadeboard[strlist[0]] = strlist[1] #JUSTE POUR LE MOMEBT
+    print(nometscore)
+  occurence = 0
+  doublon = []
   for i in range(len(nometscore)):
-    if nometscore.count(nometscore[i]) > 1:
-      print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
+    for e in range(len(nometscore[i])):
+      if nometscore[e].count(nometscore[i][0]) == 1:
+        occurence += 1
+      if occurence > 1:
+        print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
+        doublon.append(i)
+  '''
+  while len(doublon) > 2:
+    print(doublon)
+    doublon.pop(0)
+    nometscore.pop(doublon[0])
+    doublon.pop(0)
+  '''
   
   #print('noms utilisateurs suivis de leur score = ',dictionnaire_leadeboard)
   '''
   for key, value in dictionnaire_leadeboard.items():
     print(valeurfinale.count(key))# ne marche pas car il faudrait trouver une fonction qui regarde si le mot est contenu dans le codage userscore
   '''
-    
+  print(nometscore)
   dictionnaire_leadeboard2 = dict(sorted(dictionnaire_leadeboard.items(), key=lambda item: item[1], reverse= True))
   #print(dictionnaire_leadeboard2)
   
@@ -73,7 +92,7 @@ def lecture_serveur_TS():
 # IL FAUT FAIRE UN TRUC QUI CLASSE LE NIVEAU
 # PETIT, PROBLEME IL S'AGIT D'UN FEED DONC SEULEMENT LES DEUX DERNIERES VALEURS SONT CONSERVEES
 # FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
-'''
-while True : 
-  lecture_serveur_TS()
-'''
+if __name__ == '__main__': # si le code est executé à part(= environnement de test) ou importé(= jeu)
+  while True : 
+    publier_score('oscar',57)
+    lecture_serveur_TS()
