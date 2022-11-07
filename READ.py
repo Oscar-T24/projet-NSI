@@ -44,12 +44,24 @@ def lecture_serveur_TS():
 '''
  # faire un code ici qui sépare l'utilisateur de son score
   dictionnaire_leadeboard = {}
+  nometscore = []
   for i in range(len(valeurfinale)):
     strlist = ''
-    strlist = re.split('(\d+)', valeurfinale[i])
-    dictionnaire_leadeboard[strlist[0]] = strlist[1]
-    
+    strlist = re.split('(\d+)', valeurfinale[i]) # PROBLEME ICI
+    strlist.pop(2)
+    nometscore.append(strlist)
+    #ajouter un script qui supprime les doublons
+    dictionnaire_leadeboard[strlist[0]] = strlist[1] #JUSTE POUR LE MOMEBT
+  for i in range(len(nometscore)):
+    if nometscore.count(nometscore[i]) > 1:
+      print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
+  
   #print('noms utilisateurs suivis de leur score = ',dictionnaire_leadeboard)
+  '''
+  for key, value in dictionnaire_leadeboard.items():
+    print(valeurfinale.count(key))# ne marche pas car il faudrait trouver une fonction qui regarde si le mot est contenu dans le codage userscore
+  '''
+    
   dictionnaire_leadeboard2 = dict(sorted(dictionnaire_leadeboard.items(), key=lambda item: item[1], reverse= True))
   #print(dictionnaire_leadeboard2)
   
@@ -61,7 +73,6 @@ def lecture_serveur_TS():
 #fIL FAUT FAIRE UN TRUC QUI CLASSE LE NIVEAU
 # PETIT PROBLEME IL S4AGIT D4UN FEED DONC SEULEMENT LES DEUX DERNIERES VALEURS SONT CONSERVEES
 # FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
-'''
+
 while True : 
   lecture_serveur_TS()
-'''
