@@ -1,4 +1,4 @@
-
+import tqm
 import urllib.request
 from random import randint
 def publier_score(utilisateur, score):
