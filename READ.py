@@ -58,15 +58,25 @@ def lecture_serveur_TS():
     #ajouter un script qui supprime les doublons
     dictionnaire_leadeboard[strlist[0]] = strlist[1] #JUSTE POUR LE MOMEBT
     print(nometscore)
-  occurence = 0
   doublon = []
-  for i in range(len(nometscore)):
-    for e in range(len(nometscore[i])):
-      if nometscore[e].count(nometscore[i][0]) == 1:
+  for i in range(len(nometscore)): # parcourir la liste entiere
+    occurence = 0 # reinitialiser le nb d'occurence à chaque changement
+    for e in range(len(nometscore)):
+      if nometscore[e][0] == nometscore[i][0]:
         occurence += 1
-      if occurence > 1:
-        print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
-        doublon.append(i)
+    if occurence > 1:
+      print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
+      doublon.append(i)
+  print(doublon) # AFFICHER LES INDICES DES DOUBLONS
+  '''
+  doublon = list(set(doublon))
+  liste_sans_doublon = []
+
+  for i in range(len(nometscore)):
+    if i not in doublon:
+      liste_sans_doublon.append(nometscore[i])
+  '''
+  #print(liste_sans_doublon)
   '''
   while len(doublon) > 2:
     print(doublon)
@@ -94,5 +104,5 @@ def lecture_serveur_TS():
 # FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
 if __name__ == '__main__': # si le code est executé à part(= environnement de test) ou importé(= jeu)
   while True : 
-    publier_score('oscar',57)
+    publier_score('oscarito',57)
     lecture_serveur_TS()
