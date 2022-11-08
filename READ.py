@@ -10,7 +10,7 @@ from random import randint
 from PARSING import publier_score
 def lecture_serveur_TS():
   #TS = urllib.request.urlopen("https://api.thingspeak.com/channels/1922406/feeds.json?results=1")
-  TS = urllib.request.urlopen(" https://api.thingspeak.com/channels/1922406/fields/1.json?api_key=XEPU2C2CXF5SWCMM&results=20") #on peux changer le nombre de variables recues avec reulsts
+  TS = urllib.request.urlopen(" https://api.thingspeak.com/channels/1922406/fields/1.json?api_key=XEPU2C2CXF5SWCMM&results=100") #on peux changer le nombre de variables recues avec reulsts
   response = TS.read()
   data=json.loads(response)
   #pprint(data) 
@@ -67,25 +67,27 @@ def lecture_serveur_TS():
       if nometscore[e][0] == nometscore[i][0]:
         occurence += 1
     if occurence > 1 and nometscore[i][0] not in doublon:
-      print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
+      #print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
       doublon.append(nometscore[i][0])
-      print(nometscore[i][])
-  print(doublon) # AFFICHER LES INDICES DES DOUBLONS
+      print(nometscore[i])
+  #print(doublon) # AFFICHER LES INDICES DES DOUBLONS
 
   # =================ALGORITHME DE TRI : LISTE DES NOMS DOUBLONS========================
 
   maximum_conflit = []
-  maximum_conflit = doublon[:]
+  for i in range(len(doublon)):
+    maximum_conflit.append([doublon[i][:]])
+    maximum_conflit[i].append('')
+  #print('liste actualisée pour les conflits' , maximum_conflit)
   for i in range(len(doublon)):
     maximum = 0 
     for e in range(len(nometscore)):
       if nometscore[e][0] == doublon[i]:
         if int(nometscore[e][1]) > maximum:
           maximum = int(nometscore[e][1])
-          maximum_conflit[i].append(int(maximum))
-          maximum_conflit[i][1] = maximum_conflit[i][-1]
-          print(maximum_conflit)
-  print('elements conflictuels avec meir maximum',maximum_conflit)
+          maximum_conflit[i][1] = maximum
+          #print(maximum_conflit)
+  #print('elements conflictuels avec meir maximum',maximum_conflit)
   #==========format de maximum_conflit : [[utilisateur, score max]]
   #================================================================
 
@@ -121,11 +123,15 @@ def lecture_serveur_TS():
 
   for i in range(len(liste_finale)):
     dictionnaire_leadeboard2[liste_finale[i][0]] = liste_finale[i][1]
-  #dictionnaire_leadeboard = dict(sorted(dictionnaire_leadeboard2.items(), key=lambda item: item[1], reverse= True))
+  try:
+    dictionnaire_leadeboard = dict(sorted(dictionnaire_leadeboard2.items(), key=lambda item: item[1], reverse= True))
+  except TypeError:
+    dictionnaire_leadeboard = dictionnaire_leadeboard2
+    pass
   #print(dictionnaire_leadeboard2)
   
   print('\n<=============Classement des scores récents classés par nombre de point========================>')
-  for key, value in dictionnaire_leadeboard2.items():
+  for key, value in dictionnaire_leadeboard.items():
     if int(value) > 0:
       print(key, ':', value)
   return 
@@ -134,5 +140,5 @@ def lecture_serveur_TS():
 # FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
 if __name__ == '__main__': # si le code est executé à part(= environnement de test) ou importé(= jeu)
   while True : 
-    publier_score('onathan',randint(2,98))
+    publier_score('oscarleboss',999999999)
     lecture_serveur_TS()
