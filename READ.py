@@ -64,10 +64,23 @@ def lecture_serveur_TS():
     for e in range(len(nometscore)):
       if nometscore[e][0] == nometscore[i][0]:
         occurence += 1
-    if occurence > 1:
+    if occurence > 1 and nometscore[i][0] not in doublon:
       print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
-      doublon.append(i)
+      doublon.append(nometscore[i][0])
   print(doublon) # AFFICHER LES INDICES DES DOUBLONS
+
+  # =================ALGORITHME DE TRI ========================
+  
+  maximum = 0 
+  maximum_conflit = doublon[:]
+  for i in range(len(doublon)):
+    for e in range(len(nometscore)):
+      if nometscore[e][0] == doublon[i]:
+        if nometscore[e][1] > maximum:
+          maximum = nometscore[e][1]
+          maximum_conflit[i].append(maximum)
+  print('elements conflictuels avec meir maximum',maximum_conflit)
+
   '''
   doublon = list(set(doublon))
   liste_sans_doublon = []
