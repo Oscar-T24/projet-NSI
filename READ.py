@@ -5,6 +5,7 @@ import time
 from pprint import pprint
 import re
 from PARSING import publier_score
+from random import randint
 
 from PARSING import publier_score
 def lecture_serveur_TS():
@@ -47,7 +48,7 @@ def lecture_serveur_TS():
     print('valeur envoyé')
 '''
  # faire un code ici qui sépare l'utilisateur de son score
-  dictionnaire_leadeboard = {}
+  dictionnaire_leadeboard2 = {}
   nometscore = []
   for i in range(len(valeurfinale)):
     strlist = ''
@@ -56,9 +57,10 @@ def lecture_serveur_TS():
     print(strlist)
     nometscore.append(strlist)
     #ajouter un script qui supprime les doublons
-    dictionnaire_leadeboard[strlist[0]] = strlist[1] #JUSTE POUR LE MOMEBT
-    print(nometscore)
-  doublon = []
+    #dictionnaire_leadeboard[strlist[0]] = strlist[1] #JUSTE POUR LE MOMEBT
+
+  doublon = [] # liste avec les noms qui sont presents plus d'une fois
+
   for i in range(len(nometscore)): # parcourir la liste entiere
     occurence = 0 # reinitialiser le nb d'occurence à chaque changement
     for e in range(len(nometscore)):
@@ -69,17 +71,20 @@ def lecture_serveur_TS():
       doublon.append(nometscore[i][0])
   print(doublon) # AFFICHER LES INDICES DES DOUBLONS
 
-  # =================ALGORITHME DE TRI ========================
-  
+  # =================ALGORITHME DE TRI : LISTE DES NOMS DOUBLONS========================
   maximum = 0 
-  maximum_conflit = doublon[:]
+  maximum_conflit = []
+  maximum_conflit = [doublon[:]]
   for i in range(len(doublon)):
     for e in range(len(nometscore)):
       if nometscore[e][0] == doublon[i]:
-        if nometscore[e][1] > maximum:
-          maximum = nometscore[e][1]
-          maximum_conflit[i].append(maximum)
+        if int(nometscore[e][1]) > maximum:
+          maximum = int(nometscore[e][1])
+          maximum_conflit[i].append(int(maximum))
+          maximum_conflit[i][1] = maximum_conflit[i][-1]
   print('elements conflictuels avec meir maximum',maximum_conflit)
+  #==========format de maximum_conflit : [[utilisateur, score max]]
+  #================================================================
 
   '''
   doublon = list(set(doublon))
@@ -103,8 +108,17 @@ def lecture_serveur_TS():
   for key, value in dictionnaire_leadeboard.items():
     print(valeurfinale.count(key))# ne marche pas car il faudrait trouver une fonction qui regarde si le mot est contenu dans le codage userscore
   '''
-  print(nometscore)
-  dictionnaire_leadeboard2 = dict(sorted(dictionnaire_leadeboard.items(), key=lambda item: item[1], reverse= True))
+  liste_finale = []
+  for i in range(len(nometscore)):
+    for e in range(len(maximum_conflit)):
+      if maximum_conflit[e][0] == nometscore[i][0]:
+        liste_finale.append(maximum_conflit[e])
+      else:
+        liste_finale.append(nometscore[i])
+
+  for i in range(len(liste_finale)):
+    dictionnaire_leadeboard2[liste_finale[i][0]] = liste_finale[i][1]
+  #dictionnaire_leadeboard = dict(sorted(dictionnaire_leadeboard2.items(), key=lambda item: item[1], reverse= True))
   #print(dictionnaire_leadeboard2)
   
   print('\n<=============Classement des scores récents classés par nombre de point========================>')
@@ -117,5 +131,5 @@ def lecture_serveur_TS():
 # FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
 if __name__ == '__main__': # si le code est executé à part(= environnement de test) ou importé(= jeu)
   while True : 
-    publier_score('oscarito',57)
+    publier_score('onathan',randint(2,98))
     lecture_serveur_TS()
