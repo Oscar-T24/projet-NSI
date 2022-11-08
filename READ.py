@@ -87,7 +87,7 @@ def lecture_serveur_TS():
           maximum = int(nometscore[e][1])
           maximum_conflit[i][1] = maximum
           #print(maximum_conflit)
-  #print('elements conflictuels avec meir maximum',maximum_conflit)
+  print('elements conflictuels avec meir maximum',maximum_conflit)
   #==========format de maximum_conflit : [[utilisateur, score max]]
   #================================================================
 
@@ -118,8 +118,8 @@ def lecture_serveur_TS():
     for e in range(len(maximum_conflit)):
       if maximum_conflit[e][0] == nometscore[i][0]:
         liste_finale.append(maximum_conflit[e])
-      else:
-        liste_finale.append(nometscore[i])
+      else :
+        liste_finale.append(nometscore[e])
 
   for i in range(len(liste_finale)):
     dictionnaire_leadeboard2[liste_finale[i][0]] = liste_finale[i][1]
@@ -140,5 +140,5 @@ def lecture_serveur_TS():
 # FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
 if __name__ == '__main__': # si le code est executé à part(= environnement de test) ou importé(= jeu)
   while True : 
-    publier_score('oscarleboss',999999999)
+    publier_score('lol',2)
     lecture_serveur_TS()
