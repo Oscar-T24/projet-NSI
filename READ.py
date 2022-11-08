@@ -10,7 +10,7 @@ from random import randint
 from PARSING import publier_score
 def lecture_serveur_TS():
   #TS = urllib.request.urlopen("https://api.thingspeak.com/channels/1922406/feeds.json?results=1")
-  TS = urllib.request.urlopen(" https://api.thingspeak.com/channels/1922406/fields/1.json?api_key=XEPU2C2CXF5SWCMM&results=10") #on peux changer le nombre de variables recues avec reulsts
+  TS = urllib.request.urlopen(" https://api.thingspeak.com/channels/1922406/fields/1.json?api_key=XEPU2C2CXF5SWCMM&results=20") #on peux changer le nombre de variables recues avec reulsts
   response = TS.read()
   data=json.loads(response)
   #pprint(data) 
@@ -54,7 +54,7 @@ def lecture_serveur_TS():
     strlist = ''
     strlist = re.split('(\d+)', valeurfinale[i]) # PROBLEME ICI
     strlist.pop(2)
-    print(strlist)
+    #print(strlist)
     nometscore.append(strlist)
     #ajouter un script qui supprime les doublons
     #dictionnaire_leadeboard[strlist[0]] = strlist[1] #JUSTE POUR LE MOMEBT
@@ -69,19 +69,22 @@ def lecture_serveur_TS():
     if occurence > 1 and nometscore[i][0] not in doublon:
       print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
       doublon.append(nometscore[i][0])
+      print(nometscore[i][])
   print(doublon) # AFFICHER LES INDICES DES DOUBLONS
 
   # =================ALGORITHME DE TRI : LISTE DES NOMS DOUBLONS========================
-  maximum = 0 
+
   maximum_conflit = []
-  maximum_conflit = [doublon[:]]
+  maximum_conflit = doublon[:]
   for i in range(len(doublon)):
+    maximum = 0 
     for e in range(len(nometscore)):
       if nometscore[e][0] == doublon[i]:
         if int(nometscore[e][1]) > maximum:
           maximum = int(nometscore[e][1])
           maximum_conflit[i].append(int(maximum))
           maximum_conflit[i][1] = maximum_conflit[i][-1]
+          print(maximum_conflit)
   print('elements conflictuels avec meir maximum',maximum_conflit)
   #==========format de maximum_conflit : [[utilisateur, score max]]
   #================================================================
