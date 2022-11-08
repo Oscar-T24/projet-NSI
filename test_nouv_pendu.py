@@ -68,28 +68,19 @@ def jeu_pendu(niveau):
         print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m")
         if miseajour_mot(mot_mystere, mot_trouve, l) == True:
             print(f"La lettre '{l}' est bien dans le mot a deviner.")
-            #if stage != 0:
-                # l’état du pendu   
         else:
             stage += 1
             print(f"La lettre '{l}' n'est pas dans le mot a deviner.")
-            #print(dessinPendu(stage)) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
-            # l’état du pendu
         print(dessinPendu(stage),"\033[94m{}\033[00m" .format("\n Tu a le droit à " + str(abs(6-stage)) + " erreur" + ("s" if 6-stage > 1 else "") + " avant d'être pendu!\n")) # afficher le pendu si le mot n’a pas été trouvé après le nombre d’essais permis par les dessins
-        print(' '.join(mot_trouve)) # afficher l’état d’avancement de mot_trouve
-        L += l
-        print("\nCarctères déja essayés: ║",' ║ '.join(L)) # les lettres du mot déjà devinées
-        # affichant après chaque proposition
-        #print("\n *-----------------------------------------------* \n")  
-        
-        
+        print(f"\033[1;3m {' '.join(mot_trouve)}\033[0m") # affiche l’état d’avancement de mot_trouve
+        L += l # Rajoute le caractère entré par l'utilisateur à la liste des caractères essayés
+        print("\nCarctères déja essayés: ║",' ║ '.join(L)) # les lettres du mot déjà devinées... affichant après chaque proposition
     jeu_pendu.var = (''.join(mot_mystere).rstrip()) # Pour pouvoir utiliser une variable locale dans une autre fonction
-    
     if stage < 6:
-        return 'Victoire'
+        return 'Victoire' # renvoie le mot ‘victoire’
     else:
-        return 'Défaite'
-#renvoie le mot ‘victoire’ ou ‘defaite’ selon le résultat.
+        return 'Défaite' # ou ‘defaite’ selon le résultat
+
         
 def miseajour_mot(mot_mystere, mot_trouve, l):
     '''
