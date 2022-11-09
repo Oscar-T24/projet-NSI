@@ -63,13 +63,13 @@ def lecture_serveur_TS():
 
   for i in range(len(nometscore)): # parcourir la liste entiere
     occurence = 0 # reinitialiser le nb d'occurence à chaque changement
+    print(nometscore[i])
     for e in range(len(nometscore)):
       if nometscore[e][0] == nometscore[i][0]:
         occurence += 1
-    if occurence > 1 and nometscore[i][0] not in doublon:
+    if occurence > 1 and nometscore[i][0] != doublon:
       #print('doublon trouve : user = ',nometscore[i][0], 'de score ', nometscore[i][1])
       doublon.append(nometscore[i][0])
-      print(nometscore[i])
   #print(doublon) # AFFICHER LES INDICES DES DOUBLONS
 
   # =================ALGORITHME DE TRI : LISTE DES NOMS DOUBLONS========================
@@ -87,7 +87,7 @@ def lecture_serveur_TS():
           maximum = int(nometscore[e][1])
           maximum_conflit[i][1] = maximum
           #print(maximum_conflit)
-  print('elements conflictuels avec meir maximum',maximum_conflit)
+  #print('elements conflictuels avec meir maximum',maximum_conflit)
   #==========format de maximum_conflit : [[utilisateur, score max]]
   #================================================================
 
@@ -119,7 +119,7 @@ def lecture_serveur_TS():
       if maximum_conflit[e][0] == nometscore[i][0]:
         liste_finale.append(maximum_conflit[e])
       else :
-        liste_finale.append(nometscore[e])
+        liste_finale.append(nometscore[i])
 
   for i in range(len(liste_finale)):
     dictionnaire_leadeboard2[liste_finale[i][0]] = liste_finale[i][1]
@@ -140,5 +140,5 @@ def lecture_serveur_TS():
 # FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
 if __name__ == '__main__': # si le code est executé à part(= environnement de test) ou importé(= jeu)
   while True : 
-    publier_score('lol',2)
+    #publier_score('oscar',99999)
     lecture_serveur_TS()
