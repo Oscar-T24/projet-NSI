@@ -124,7 +124,12 @@ def main():
                 niv+=2
                 score = int(total*niv)
                 print(f"⭆\x1B[4m Votre score: \x1B[0m \n \n ⮑ [ {score} ]⮐ \n ")
-                publier_score(input("Veuillez entrez votre nom d'utilisateur en minuscule, en caratcres alphabétiques (sera utilisé pour le classement): "),score)
+                état = True
+                while True:
+                    état = publier_score(input("Veuillez entrez votre nom d'utilisateur en minuscule, en caratcres alphabétiques (sera utilisé pour le classement): "),score)
+                    match état:
+                        case True:
+                            break
                 lecture_serveur_TS()
                 if total > 0 : 
                     re = 're'
