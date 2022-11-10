@@ -21,7 +21,11 @@ def cls():
 
 # ==========Fonction du jeu du pendu========== #
 def jeu_pendu(niveau):
+    '''
+    jeu du pendu
     
+    int ===> string
+    '''
     # ==========Choix du niveau========== #
     global niv 
     niv = niveau
@@ -60,7 +64,7 @@ def jeu_pendu(niveau):
                     break # 'guess' pour essayer de deviner le mot complet
                 print('Mauvais mot ! Bien essayé quand meme')
             else:
-                print("\033[31m {}\033[00m" .format('!!! vous ne pouvez pas entrer plus de 1 carcteres à la fois !!!'))
+                print("\033[31m {}\033[00m" .format('vous ne pouvez pas entrer plus de 1 carcteres à la fois !'))
             continue 
         
         # ==========Verification de l'entrée========== #
@@ -90,7 +94,7 @@ def jeu_pendu(niveau):
     else:
         return 'Défaite' 
 
-# ==========
+
 def miseajour_mot(mot_mystere, mot_trouve, l):
     '''
     met à jour mot_trouve si la lettre l est contenue dans le mot mystère 
@@ -145,7 +149,7 @@ def main():
             except ValueError:
                 print('veuillez entrer un niveau valide')
         else:
-            print('au revoir !')
+            print('Au revoir !')
             break
 
 main()
