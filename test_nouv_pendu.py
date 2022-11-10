@@ -40,7 +40,7 @@ def jeu_pendu(niveau):
     
     print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m", "❖ Si a tout moment vous souhaitez deviner le mot dans son integralité tapez 'guess' ❖ \n") 
     print(' '.join(mot_trouve))
-    print(mot_mystere) # OPTION TRICHE A RETIRER 
+    #print(mot_mystere) # OPTION TRICHE A RETIRER 
     
     stage = 0
     L = []
