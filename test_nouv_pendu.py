@@ -10,15 +10,19 @@ ssl._create_default_https_context = ssl._create_unverified_context
     # ==> Executer le fichier sur Machintosh HD > Applications > Pyhton 3.xx > Install Certificates.comman
     # Ce fichier debloque la decouverte ssl non certifié
 
+# ==========Fonction 'clear'========== #
 def cls():
     '''
     Nettoie le 'buffer' de l'ecran pour plus de lisibilité
+    
     None
     '''
     os.system('cls' if os.name=='nt' else 'clear')
 
+# ==========Fonction du jeu du pendu========== #
 def jeu_pendu(niveau):
     
+    # ==========Choix du niveau========== #
     global niv 
     niv = niveau
     
@@ -27,25 +31,24 @@ def jeu_pendu(niveau):
     liste_mots = fichier.readlines()
     mot_mystere = ''
     while len(mot_mystere) > (niveau+4)*(niveau+2) or len(mot_mystere) < (niveau+2)*(niveau+2):
-        mot_mystere = (liste_mots[randint(1,323470)]) # Choix un mot au hasard dans le fichier 'mot.txt'
+        mot_mystere = (liste_mots[randint(1,323470)]) 
     fichier.close()
-
+    
     # ==========Definition de 'mot_trouve'========== #
     mot_trouve = []
     for i in mot_mystere[0:-1]:
         if i == '-':
-            mot_trouve.append("-") # rajouter les traits d'unions s'ils existent(car ce ne sont pas des caracteres)... en utilisant des tirets pour les lettres inconnues
+            mot_trouve.append("-") # Trait d'union negligés
         else:
             mot_trouve.append('_')
-    
+  
     cls()
-    
     print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m", "❖ Si a tout moment vous souhaitez deviner le mot dans son integralité tapez 'guess' ❖ \n \n",' '.join(mot_trouve))
-    print(mot_mystere) # OPTION TRICHE A RETIRER 
+    # print(mot_mystere) # OPTION TRICHE A RETIRER 
     
     stage = 0 # Pour les étapes du dessin ascii du pendu
     L = [] # Pour la liste des caractères essayés
-
+    
     # ==========Boucle du jeu========== #
     while stage < 6 and (''.join(mot_trouve)).rstrip() != (''.join(mot_mystere).rstrip()): # Tant que le pendu n'est pas finit et que le mot ne sois pas trouvé...
         
@@ -59,6 +62,7 @@ def jeu_pendu(niveau):
             else:
                 print("\033[31m {}\033[00m" .format('!!! vous ne pouvez pas entrer plus de 1 carcteres à la fois !!!'))
             continue 
+        
         # ==========Verification de l'entrée========== #
         if l in L:
             print("\033[31m {}\033[00m".format(f"caractère '{l}' déja essayé ! veuillez rentrer un autre caractère"))
@@ -66,29 +70,33 @@ def jeu_pendu(niveau):
         if l.isalpha() == False:
             print("\033[31m {}\033[00m".format(f"le caractère '{l}' n'est pas dans l'alphabet ! Notez que les mots ne contiennent pas de caracteres spéciaux"))       
             continue
-
-        cls()
+        cls() 
+        
+        # ==========Affichage du pendu et autre========== #
         print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m")
         if miseajour_mot(mot_mystere, mot_trouve, l) == True:
             print(f"La lettre '{l}' est bien dans le mot a deviner.")
         else:
             stage += 1
             print(f"La lettre '{l}' n'est pas dans le mot a deviner.")
-        print(dessinPendu(stage),"\033[94m{}\033[00m" .format("\n Tu a le droit à " + str(abs(6-stage)) + " erreur" + ("s" if 6-stage > 1 else "") + " avant d'être pendu!\n"),f"\033[1;3m \n{' '.join(mot_trouve)}\n \033[0m","\n>> Carctères déja essayés: ║",' ║ '.join(L))
-        
-        L += l 
+        L += l
+        print(dessinPendu(stage),"\033[94m{}\033[00m" .format("\n Tu a le droit à " + str(abs(6-stage)) + " erreur" + ("s" if 6-stage > 1 else "") + " avant d'être pendu!\n"),f"\033[1;3m \n{' '.join(mot_trouve)}\n \033[0m","\n>> Caractères déja essayés: ║",' ║ '.join(L)) 
     
     jeu_pendu.var = (''.join(mot_mystere).rstrip()) # '.var ' pour pouvoir utiliser une variable locale dans une autre fonction
     
+    # ==========Retour========== #
     if stage < 6:
-        return 'Victoire' # renvoie le mot ‘victoire’
+        return 'Victoire' 
     else:
-        return 'Défaite' # ou ‘defaite’ selon le résultat
+        return 'Défaite' 
 
-        
+# ==========
 def miseajour_mot(mot_mystere, mot_trouve, l):
     '''
-    met à jour mot_trouve si la lettre l est contenue dans le mot mystère et qui renvoie un booléen indiquant si la lettre est dans mot_mystere
+    met à jour mot_trouve si la lettre l est contenue dans le mot mystère 
+    et qui renvoie un booléen indiquant si la lettre est dans mot_mystere
+
+    string, list, string ==> bool
     '''
     check = 0
     for i in range(0,len(mot_mystere)):
@@ -97,13 +105,15 @@ def miseajour_mot(mot_mystere, mot_trouve, l):
             check += 1
     if check > 0:
         return True
-    else: 
+    else:
         return False
-        
+
 def main():
     global niv
     """
-    execute le code principal 
+    execute le code principal
+    
+    none ==> string 
     """
     pourcentage_victoire = 0
     effectif_victoire = 0
