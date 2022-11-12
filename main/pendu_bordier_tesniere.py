@@ -22,9 +22,10 @@ def cls():
 # ==========Fonction du jeu du pendu========== #
 def jeu_pendu(niveau):
     '''
-    jeu du pendu
+    permet de jouer au pendu et renvoie le mot
+    'victoire' ou 'defaite' selon le résultat.
 
-    int ===> string
+    int (niv de difficulté) ===> string
     '''
     # ==========Choix du niveau========== #
     global niv
