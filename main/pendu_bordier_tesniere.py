@@ -98,8 +98,8 @@ def jeu_pendu(niveau):
 
 def miseajour_mot(mot_mystere, mot_trouve, l):
     '''
-    met à jour mot_trouve si la lettre l est contenue dans le mot mystère 
-    et qui renvoie un booléen indiquant si la lettre est dans mot_mystere
+    met à jour 'mot_trouve' si la lettre l est contenue dans le mot mystère 
+    et qui renvoie un booléen indiquant si la lettre est dans 'mot_mystere'
 
     string, list, string ==> bool
     '''
