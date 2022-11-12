@@ -8,38 +8,36 @@ Le jeu du pendu consiste à choisir un mot et à le faire deviner à son adversa
 
 ## Prérequis
 
-Nous vous recommendons plusieurs choses avant 
+Nous vous recommendons plusieurs choses avant avant de telecharger et lancer votre code:
+- a
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the test [test](https://google.com) to install test.
 
 ```bash
-pip install foobar
+pip install test
 ```
 
 ## Usage
 
 ```python
-import foobar
+import test
 
-# returns 'words'
-foobar.pluralize('word')
+# returns 'tes'
+test.pluralize('tes')
 
-# returns 'geese'
-foobar.pluralize('goose')
+# returns 'test'
+test.pluralize('test')
 
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+# returns 'tests'
+test.singularize('tests')
 ```
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+test
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[test](https://google.com)
