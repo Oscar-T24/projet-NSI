@@ -14,7 +14,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 def cls():
     '''
     Nettoie le 'buffer' de l'ecran pour plus de lisibilité
-    
+
     None
     '''
     os.system('cls' if os.name=='nt' else 'clear')
@@ -23,36 +23,36 @@ def cls():
 def jeu_pendu(niveau):
     '''
     jeu du pendu
-    
+
     int ===> string
     '''
     # ==========Choix du niveau========== #
-    global niv 
+    global niv
     niv = niveau
-    
+
     # ==========Lecture mot.txt========== #
     fichier = open("mots.txt",'r')
     liste_mots = fichier.readlines()
     mot_mystere = ''
     while len(mot_mystere) > (niveau+4)*(niveau+2) or len(mot_mystere) < (niveau+2)*(niveau+2):
-        mot_mystere = (liste_mots[randint(1,323470)]) 
+        mot_mystere = (liste_mots[randint(1,323470)])
     fichier.close()
-    
+
     # ==========Definition de 'mot_trouve'========== #
     mot_trouve = []
     for i in mot_mystere[0:-1]:
         if i == '-':
-            mot_trouve.append("-") # Trait d'union negligés
+            mot_trouve.append("-") # Traits d'unions negligés
         else:
             mot_trouve.append('_')
-  
+
     cls()
     print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m", "❖ Si a tout moment vous souhaitez deviner le mot dans son integralité tapez 'guess' ❖ \n \n",' '.join(mot_trouve))
     # print(mot_mystere) # OPTION TRICHE A RETIRER 
-    
+
     stage = 0 # Pour les étapes du dessin ascii du pendu
     L = [] # Pour la liste des caractères essayés
-    
+
     # ==========Boucle du jeu========== #
     while stage < 6 and (''.join(mot_trouve)).rstrip() != (''.join(mot_mystere).rstrip()): # Tant que le pendu n'est pas finit et que le mot ne sois pas trouvé...
         
@@ -86,13 +86,13 @@ def jeu_pendu(niveau):
         L += l
         print(dessinPendu(stage),"\033[94m{}\033[00m" .format("\n Tu a le droit à " + str(abs(6-stage)) + " erreur" + ("s" if 6-stage > 1 else "") + " avant d'être pendu!\n"),f"\033[1;3m \n{' '.join(mot_trouve)}\n \033[0m","\n>> Caractères déja essayés: ║",' ║ '.join(L)) 
     
-    jeu_pendu.var = (''.join(mot_mystere).rstrip()) # '.var ' pour pouvoir utiliser une variable locale dans une autre fonction
-    
+    jeu_pendu.var = (''.join(mot_mystere).rstrip()) # '.var' pour pouvoir utiliser une variable locale dans une autre fonction
+
     # ==========Retour========== #
     if stage < 6:
-        return 'Victoire' 
+        return 'Victoire'
     else:
-        return 'Défaite' 
+        return 'Défaite'
 
 
 def miseajour_mot(mot_mystere, mot_trouve, l):
@@ -113,29 +113,39 @@ def miseajour_mot(mot_mystere, mot_trouve, l):
         return False
 
 def main():
-    global niv
     """
     execute le code principal
-    
-    none ==> string 
+
+    none ==> string
     """
+    global niv
+    
+    # ==========Variables========== #
     pourcentage_victoire = 0
     effectif_victoire = 0
     total = 0
-    re = ''     
-    difficulté = ['facile','moyen','difficile']  
+    re = ''
+    difficulté = ['facile','moyen','difficile']
+    cls()
+
     while True:
         if input(f"========================================\n➥ Voulez vous {re}jouer au pendu? [o/n]: ") == "o":
-            try:                
+            try:
+                
+                # ==========Victoire========== #
                 if jeu_pendu(difficulté.index(input('➥ Quel niveau de difficulté choisissez vous? [facile, moyen, difficile]: '))) == 'Victoire':
                     effectif_victoire += 1
                     cls()
                     print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m")
-                    print(f"Le mot a trouver était bien '{jeu_pendu.var}' \n Victoire ! \n") # terminer le jeu si toutes les lettres du mot ont été trouvées.
+                    print(f"Le mot a trouver était bien '{jeu_pendu.var}' \n Victoire ! \n")
+                
+                # ==========Défaite========== #
                 else:
                     cls()
                     print("\033[1;3m \n ✱----------✱ LE JEU DU PENDU ✱----------✱ \n \033[0m")
                     print(f"Défaite, désole ca sera pour la prochaine fois ;-) \n le mot était \033[1m{jeu_pendu.var}\033[0m \n \n")
+                
+                # ==========Stats de l'utilisateur========== #
                 total += 1
                 pourcentage_victoire = round(effectif_victoire * 100 / total)
                 print(f"⭆\x1B[4m Pourcentage de 'Victoire // Défaite': \x1B[0m \n \n ⮑ [ {pourcentage_victoire} % // {100-pourcentage_victoire} % ]⮐ \n ")
@@ -143,6 +153,8 @@ def main():
                 score = int(total*niv)
                 print(f"⭆\x1B[4m Votre score: \x1B[0m \n \n ⮑ [ {score} ]⮐ \n ")
                 état = True
+                
+                # ==========Affichage leaderbord========== #
                 while True:
                     état = publier_score(input("Veuillez entrez votre nom d'utilisateur en minuscule, en caratcres alphabétiques (sera utilisé pour le classement): "),score)
                     match état:
