@@ -31,9 +31,12 @@ Notez qu'actuellement notre code s'execute au mieux sur:
 * [Powershell](https://learn.microsoft.com/en-us/powershell/) (pour windows)
 * Et [Visual Studio Code](https://code.visualstudio.com/) (pour les autres systemes d'exploitations)
 
-1. Telechargez le fichier suivant https://github.com/Oscar-T24/projet-NSI/tree/main/Main. 
+1. Telechargez le fichier suivant https://downgit.github.io/#/home?url=https://github.com/Oscar-T24/projet-NSI/tree/main/Main. 
 2. Une fois le telechargement du fichier .zip finit, ouvrez le et et vous devriez avoir un fichie nommé "Main".
-2.1 Si ce n'est pas le cas, renommez ainsi
+    - 2.1 Si ce n'est pas le cas, renommez ainsi
+3. Maintenant vous avez deux options:
+    - A. Vous ouvrez le FOLDER "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... 
+      - 
 
 
 
