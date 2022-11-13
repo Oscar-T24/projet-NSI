@@ -9,26 +9,27 @@ Le jeu du pendu consiste à choisir un mot et à le faire deviner à son adversa
 ## Prérequis
 
 Nous vous recommendons plusieurs choses avant avant de telecharger et lancer votre code:
-- vérifier que votre python supporte la librairie urllib(native sur python > 3.6) :
-# Si le code bloque sur la biblioteque urllib sur Mac OS 
-     ==> Executer le fichier sur  
-    
-        Machintosh HD > Applications > Pyhton 3.xx > Install Certificates.command
-    
-     Ce fichier commande(à executer avec les privilèges sudo) debloque la decouverte ssl non certifié
-# il sera aussi necessaire d'installer la librairie tqdm nécessaire pour la barre de chargement
-    pour cela, executez pip/brew(/etc) install tqdm 
-    
-        pip install tqdm
-    
+- Vérifier que votre python supporte la librairie [urllib](https://docs.python.org/3/library/urllib.html) (native sur python > 3.6)
+- Si le code bloque sur la biblioteque urllib sur Mac OS, executez le fichier (double click) qui se trouve dans:
+```  
+Machintosh HD > Applications > Pyhton 3.xx > Install Certificates.command
+```   
+Ce fichier commande debloque la decouverte ssl non certifié
 
-    et vous etes bon !
+- Il sera aussi necessaire d'installer la librairie tqdm nécessaire pour la barre de chargement. 
+
+Pour cela, utiliez le package manager [pip](https://pip.pypa.io/en/stable/) pour installer [tqdm](https://pypi.org/project/tqdm/) grâce a votre terminal
+
+```bash
+pip install tqdm
+```
+et vous etes bon !
 
 ## Utilisation
 
 Notez qu'actuellement notre code s'execute au mieux sur 
-* Powershell(pour windows)
-* et sur visual Studio dans les autres systemes d'exploitations
+* [Powershell](https://learn.microsoft.com/en-us/powershell/) (pour windows)
+* Et [Visual Studio Code](https://code.visualstudio.com/) (pour les autres systemes d'exploitations)
 
 ATTENTION : 
 - le code ne s'executera pas correctement sur le terminal(Mac OS) et sur la console de IDLE(qui n'affichera pas les codes de sorties ANSII necessaires pour la mise en forme de la sortie)
