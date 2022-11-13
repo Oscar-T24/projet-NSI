@@ -34,9 +34,10 @@ Notez qu'actuellement notre code s'execute au mieux sur:
 1. Telechargez le fichier suivant https://downgit.github.io/#/home?url=https://github.com/Oscar-T24/projet-NSI/tree/main/Main. 
 2. Une fois le telechargement du fichier .zip finit, ouvrez le et et vous devriez avoir un fichie nommé "Main".
     - 2.1 Si ce n'est pas le cas, renommez ainsi
-3. Maintenant vous avez deux options:
+3. Maintenant vous avez deux options: 
     - OPTION A. Vous ouvrez le FOLDER "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... [folder "Main"]
-        - Dans le fichier "pendu_bordier_tesniere.py" a la ligne 36, faite la modification ci-dessous:
+        - Dans le fichier "pendu_bordier_tesniere.py" a la ligne 36, faisez la modification ci-dessous
+        - Tuto YT: https://youtu.be/Iu_Djuznu9I
 
 ### DE...
 ```python
@@ -49,17 +50,23 @@ Notez qu'actuellement notre code s'execute au mieux sur:
 3. 
     - OPTION B. Déplacez le folder "Main" dans un autre folder vide 
         - Ouvrez le folder vide où se trouve le folder "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... [folder vide]
+        - Tuto YT: https://youtu.be/ImWmeeeUxyQ
 
-ATTENTION : 
+## ATTENTION ! : 
 - le code ne s'executera pas correctement sur le terminal(Mac OS) et sur la console de IDLE(qui n'affichera pas les codes de sorties ANSII necessaires pour la mise en forme de la sortie)
 
-Notre code principal importe directement le fichier pendu in
+- veuillez faire attention à ouvrir le dossier parent **Main** lorsque vous ouvrez votre editeur(idealement, VScode) et pas seulement le fichier code **pendu_bordier_tesniere.py**
 
-## Reference 
+## Reference & Auteurs
 
 Si vous souhaitez obtenir tous les fichiers que nous avons utilisés(à savoir, les tests et documentation) vous pouvez visiter notre page github du projet du pendu à l'addresse suivante : 
 
 https://github.com/Oscar-T24/projet-NSI
 
+- Github:
+    - @Oscar-T24
+    - @Cosmopolux
 
-
+- Email:
+    - c.bordier24@ejm.org
+    - o.tesniere24@ejm.org
