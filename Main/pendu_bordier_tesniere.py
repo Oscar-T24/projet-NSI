@@ -33,7 +33,7 @@ def jeu_pendu(niveau):
     niv = niveau
 
     # ==========Lecture mot.txt========== #
-    fichier = open("main/mots.txt",'r')
+    fichier = open("Main/mots.txt",'r')
     liste_mots = fichier.readlines()
     mot_mystere = ''
     while len(mot_mystere) > (niveau+4)*(niveau+2) or len(mot_mystere) < (niveau+2)*(niveau+2):
