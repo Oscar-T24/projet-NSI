@@ -17,12 +17,12 @@ Machintosh HD > Applications > Pyhton 3.xx > Install Certificates.command
     ```
      Ce fichier debloque la decouverte ssl non certifié
 # il sera aussi necessaire d'installer la librairie tqdm nécessaire pour la barre de chargement
-     pour cela, executez pip/brew(/etc) install tqdm 
-    ```
-     pip install tqdm
-    ```bash
+    pour cela, executez pip/brew(/etc) install tqdm 
+    
+        pip install tqdm
+    
 
-     et vous etes bon !
+    et vous etes bon !
 
 ## Utilisation
 
