@@ -35,10 +35,20 @@ Notez qu'actuellement notre code s'execute au mieux sur:
 2. Une fois le telechargement du fichier .zip finit, ouvrez le et et vous devriez avoir un fichie nommé "Main".
     - 2.1 Si ce n'est pas le cas, renommez ainsi
 3. Maintenant vous avez deux options:
-    - A. Vous ouvrez le FOLDER "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... 
-      - 
+    - OPTION A. Vous ouvrez le FOLDER "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... [folder "Main"]
+        - Dans le fichier "pendu_bordier_tesniere.py" a la ligne 36, faite la modification ci-dessous:
 
-
+### DE...
+```python
+    fichier = open("Main/mots.txt",'r')
+```
+### À...
+```python
+    fichier = open("mots.txt",'r')
+```
+3. 
+    - OPTION B. Déplacez le folder "Main" dans un autre folder vide 
+        - Ouvrez le folder vide où se trouve le folder "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... [folder vide]
 
 ATTENTION : 
 - le code ne s'executera pas correctement sur le terminal(Mac OS) et sur la console de IDLE(qui n'affichera pas les codes de sorties ANSII necessaires pour la mise en forme de la sortie)
