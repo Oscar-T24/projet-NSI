@@ -35,9 +35,8 @@ Notez qu'actuellement notre code s'execute au mieux sur:
 2. Une fois le telechargement du fichier .zip finit, ouvrez le et et vous devriez avoir un fichie nommé "Main".
     - 2.1 Si ce n'est pas le cas, renommez ainsi
 3. Maintenant vous avez deux options: 
-    - OPTION A. Vous ouvrez le FOLDER "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... [folder "Main"]
-        - Dans le fichier "pendu_bordier_tesniere.py" a la ligne 36, faisez la modification ci-dessous
-        - Tuto YT: https://youtu.be/Iu_Djuznu9I
+    - OPTION A. Vous ouvrez le **dossier** "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... [dossier "Main"]
+        - Dans le fichier "pendu_bordier_tesniere.py" a la ligne 36, faites la modification ci-dessous:
 
 ### DE...
 ```python
@@ -47,15 +46,21 @@ Notez qu'actuellement notre code s'execute au mieux sur:
 ```python
     fichier = open("mots.txt",'r')
 ```
+Tuto YT option A: https://youtu.be/Iu_Djuznu9I
+<br />
+<br />
+
 3. 
-    - OPTION B. Déplacez le folder "Main" dans un autre folder vide 
-        - Ouvrez le folder vide où se trouve le folder "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... [folder vide]
-        - Tuto YT: https://youtu.be/ImWmeeeUxyQ
+    - OPTION B. Déplacez le dossier "Main" dans un autre dossier **vide** 
+        - Ouvrez le dossier vide où se trouve le dossier "Main" avec votre éditeur de code (de préférence VS code) en utilisant cmd + O ou la barre de menu: File > Open file... [dossier vide (qui contient le dossier "Main")]
+        - Tuto YT option B: https://youtu.be/ImWmeeeUxyQ
+<br />
+<br />
 
 ## ATTENTION ! : 
-- le code ne s'executera pas correctement sur le terminal(Mac OS) et sur la console de IDLE(qui n'affichera pas les codes de sorties ANSII necessaires pour la mise en forme de la sortie)
+- Le code ne s'executera pas correctement sur le terminal(Mac OS) et sur la console de IDLE(qui n'affichera pas les codes de sorties ANSII necessaires pour la mise en forme de la sortie)
 
-- veuillez faire attention à ouvrir le dossier parent **Main** lorsque vous ouvrez votre editeur(idealement, VScode) et pas seulement le fichier code **pendu_bordier_tesniere.py**
+- Veuillez faire attention à ouvrir le dossier parent **Main** lorsque vous ouvrez votre editeur(idealement, VScode) et pas seulement le fichier code **pendu_bordier_tesniere.py**
 
 ## Reference & Auteurs
 
