@@ -27,9 +27,15 @@ et vous etes bon !
 
 ## Utilisation
 
-Notez qu'actuellement notre code s'execute au mieux sur 
+Notez qu'actuellement notre code s'execute au mieux sur:
 * [Powershell](https://learn.microsoft.com/en-us/powershell/) (pour windows)
 * Et [Visual Studio Code](https://code.visualstudio.com/) (pour les autres systemes d'exploitations)
+
+1. Telechargez le fichier suivant https://github.com/Oscar-T24/projet-NSI/tree/main/Main. 
+2. Une fois le telechargement du fichier .zip finit, ouvrez le et et vous devriez avoir un fichie nommé "Main".
+2.1 Si ce n'est pas le cas, renommez ainsi
+
+
 
 ATTENTION : 
 - le code ne s'executera pas correctement sur le terminal(Mac OS) et sur la console de IDLE(qui n'affichera pas les codes de sorties ANSII necessaires pour la mise en forme de la sortie)
