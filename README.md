@@ -11,17 +11,17 @@ Le jeu du pendu consiste à choisir un mot et à le faire deviner à son adversa
 Nous vous recommendons plusieurs choses avant avant de telecharger et lancer votre code:
 - vérifier que votre python supporte la librairie urllib(native sur python > 3.6) :
 # Si le code bloque sur la biblioteque urllib sur Mac OS 
-    # ==> Executer le fichier sur  
+     ==> Executer le fichier sur  
     ```bash
 Machintosh HD > Applications > Pyhton 3.xx > Install Certificates.command
     ```
-    # Ce fichier debloque la decouverte ssl non certifié
+     Ce fichier debloque la decouverte ssl non certifié
 # il sera aussi necessaire d'installer la librairie tqdm nécessaire pour la barre de chargement
-    # pour cela, executez pip/brew(/etc) install tqdm 
+     pour cela, executez pip/brew(/etc) install tqdm 
     ```bash
 pip install tqdm
     ```
-    # et vous etes bon !
+     et vous etes bon !
 
 ## Utilisation
 
