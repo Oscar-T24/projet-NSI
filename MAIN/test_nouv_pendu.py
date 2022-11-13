@@ -23,17 +23,16 @@ def cls():
 # ==========Fonction du jeu du pendu========== #
 def jeu_pendu(niveau):
     '''
-    permet de jouer au pendu et renvoie le mot
-    'victoire' ou 'defaite' selon le résultat.
+    jeu du pendu
 
-    int (niv de difficulté) --> string
+    int ===> string
     '''
     # ==========Choix du niveau========== #
     global niv
     niv = niveau
 
     # ==========Lecture mot.txt========== #
-    fichier = open("main/mots.txt",'r')
+    fichier = open("MAIN/mots.txt",'r')
     liste_mots = fichier.readlines()
     mot_mystere = ''
     while len(mot_mystere) > (niveau+4)*(niveau+2) or len(mot_mystere) < (niveau+2)*(niveau+2):
@@ -99,8 +98,8 @@ def jeu_pendu(niveau):
 
 def miseajour_mot(mot_mystere, mot_trouve, l):
     '''
-    met à jour 'mot_trouve' si la lettre l est contenue dans le mot mystère 
-    et qui renvoie un booléen indiquant si la lettre est dans 'mot_mystere'
+    met à jour mot_trouve si la lettre l est contenue dans le mot mystère 
+    et qui renvoie un booléen indiquant si la lettre est dans mot_mystere
 
     string, list, string ==> bool
     '''

@@ -12,7 +12,7 @@ def lecture_serveur_TS():
   '''
   None --> None
   Récupére les scores des utilisateurs depuis le serveur API de thingspeak 
-  Trie les doublons et affiche le leaderboard à l'écran
+  Trie les doublons(garde chacun de leur maximum) et affiche le leaderboard à l'écran
   '''
   TS = urllib.request.urlopen("https://api.thingspeak.com/channels/1922406/fields/1.json?api_key=XEPU2C2CXF5SWCMM&results=100") #on peux changer le nombre de variables recues avec reulsts
   response = TS.read()

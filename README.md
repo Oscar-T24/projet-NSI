@@ -9,35 +9,35 @@ Le jeu du pendu consiste à choisir un mot et à le faire deviner à son adversa
 ## Prérequis
 
 Nous vous recommendons plusieurs choses avant avant de telecharger et lancer votre code:
-- a
+- vérifier que votre python supporte la librairie urllib(native sur python > 3.6) :
+# Si le code bloque sur la biblioteque urllib sur Mac OS 
+    # ==> Executer le fichier sur  
+    ```bash
+Machintosh HD > Applications > Pyhton 3.xx > Install Certificates.command
+    ```
+    # Ce fichier debloque la decouverte ssl non certifié
+# il sera aussi necessaire d'installer la librairie tqdm nécessaire pour la barre de chargement
+    # pour cela, executez pip/brew(/etc) install tqdm 
+    ```bash
+pip install tqdm
+    ```
+    # et vous etes bon !
 
-## Installation
+## Utilisation
 
-Use the test [test](https://google.com) to install test.
+Notez qu'actuellement notre code s'execute au mieux sur 
+* Powershell(pour windows)
+* et sur visual Studio dans les autres systemes d'exploitations
 
-```bash
-pip install test
-```
+ATTENTION : 
+- le code ne s'executera pas correctement sur le terminal(Mac OS) et sur la console de IDLE(qui n'affichera pas les codes de sorties ANSII necessaires pour la mise en forme de la sortie)
 
-## Usage
+Notre code principal importe directement le fichier pendu in
 
-```python
-import test
+## Reference 
 
-# returns 'tes'
-test.pluralize('tes')
+Si vous souhaitez obtenir tous les fichiers que nous avons utilisés(à savoir, les tests et documentation) vous pouvez visiter notre page github du projet du pendu à l'addresse suivante : 
 
-# returns 'test'
-test.pluralize('test')
 
-# returns 'tests'
-test.singularize('tests')
-```
 
-## Contributing
 
-test
-
-## License
-
-[test](https://google.com)
