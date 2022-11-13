@@ -12,10 +12,10 @@ Nous vous recommendons plusieurs choses avant avant de telecharger et lancer vot
 - vérifier que votre python supporte la librairie urllib(native sur python > 3.6) :
 # Si le code bloque sur la biblioteque urllib sur Mac OS 
      ==> Executer le fichier sur  
-    ```bash
-Machintosh HD > Applications > Pyhton 3.xx > Install Certificates.command
-    ```
-     Ce fichier debloque la decouverte ssl non certifié
+    
+        Machintosh HD > Applications > Pyhton 3.xx > Install Certificates.command
+    
+     Ce fichier commande(à executer avec les privilèges sudo) debloque la decouverte ssl non certifié
 # il sera aussi necessaire d'installer la librairie tqdm nécessaire pour la barre de chargement
     pour cela, executez pip/brew(/etc) install tqdm 
     
