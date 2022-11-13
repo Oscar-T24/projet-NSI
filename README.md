@@ -39,6 +39,7 @@ Notre code principal importe directement le fichier pendu in
 
 Si vous souhaitez obtenir tous les fichiers que nous avons utilisés(à savoir, les tests et documentation) vous pouvez visiter notre page github du projet du pendu à l'addresse suivante : 
 
+https://github.com/Oscar-T24/projet-NSI
 
 
 
