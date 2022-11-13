@@ -2,6 +2,11 @@ from tqdm import tqdm
 import urllib.request
 from random import randint
 def publier_score(utilisateur, score):
+    '''
+    str , int --> bool
+    prend le nom d'utilisateur avec son score, 
+    vérifie s'il est correctement écrit(renvoi False si non), auquel cas il renvoi True
+    '''
     if utilisateur == '' or utilisateur.isalpha() == False or ' ' in utilisateur:
             print('veuillez entrer un nom valide')
             return False

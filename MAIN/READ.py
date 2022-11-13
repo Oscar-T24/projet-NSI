@@ -9,7 +9,11 @@ from random import randint
 
 from PARSING import publier_score
 def lecture_serveur_TS():
-  #TS = urllib.request.urlopen("https://api.thingspeak.com/channels/1922406/feeds.json?results=1")
+  '''
+  None --> None
+  Récupére les scores des utilisateurs depuis le serveur API de thingspeak 
+  Trie les doublons et affiche le leaderboard à l'écran
+  '''
   TS = urllib.request.urlopen("https://api.thingspeak.com/channels/1922406/fields/1.json?api_key=XEPU2C2CXF5SWCMM&results=100") #on peux changer le nombre de variables recues avec reulsts
   response = TS.read()
   data=json.loads(response)
@@ -129,16 +133,13 @@ def lecture_serveur_TS():
   except TypeError:
     dictionnaire_leadeboard = dictionnaire_leadeboard2
     pass
-  #print(dictionnaire_leadeboard2)
   
   print('\n<=============Classement des scores récents classés par nombre de point========================>')
   for key, value in dictionnaire_leadeboard.items():
     if int(value) > 0:
       print(key, ':', value)
   return 
-# IL FAUT FAIRE UN TRUC QUI CLASSE LE NIVEAU
-# PETIT, PROBLEME IL S'AGIT D'UN FEED DONC SEULEMENT LES DEUX DERNIERES VALEURS SONT CONSERVEES
-# FAIRE UN SCRIPT QUI COMPARE LE SCORE FINAL DE L'UTILISATEUR AVEC CEUX DES DEUX SCORES LES PLUS RECENTS POUR DIRE S'IL A FAIT MIEUX OU MOINS BIEN
+
 if __name__ == '__main__': # si le code est executé à part(= environnement de test) ou importé(= jeu)
   while True : 
     #publier_score('oscar',99999)
