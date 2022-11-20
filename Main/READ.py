@@ -127,12 +127,10 @@ def lecture_serveur_TS():
 
   for i in range(len(liste_finale)):
     if liste_finale[i] != '':
-      dictionnaire_leadeboard2[liste_finale[i][0]] = liste_finale[i][1]
-  try:
-    dictionnaire_leadeboard = dict(sorted(dictionnaire_leadeboard2.items(), key=lambda item: item[1], reverse= True))
-  except TypeError:
-    dictionnaire_leadeboard = dictionnaire_leadeboard2
-    pass
+      dictionnaire_leadeboard2[liste_finale[i][0]] = int(liste_finale[i][1])
+  
+  dictionnaire_leadeboard = dict(sorted(dictionnaire_leadeboard2.items(), key=lambda item: item[1], reverse= True))
+  
   
   print('\n<=============Classement des scores récents classés par nombre de point========================>')
   for key, value in dictionnaire_leadeboard.items():
